@@ -2,204 +2,152 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
-  <meta name="apple-mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-  <meta name="theme-color" content="#6D28D9" />
-  <title>Start Earning</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Cash Rewards — Get Paid Instantly</title>
 
-  <!-- Warm up the offer domain -->
-  <link rel="preconnect" href="https://offerlnks.com" />
-  <link rel="dns-prefetch" href="//offerlnks.com" />
+  <!-- Speed up first navigation to offer -->
+  <link rel="dns-prefetch" href="//rewardlnk.com">
+  <link rel="preconnect" href="https://rewardlnk.com" crossorigin>
 
   <style>
-    :root {
-      --bg-1:#130B25; --bg-2:#1B0F35; --bg-3:#0E0820;
-      --ink:#EAEAF5; --muted:#B6B4CC;
-      --accent:#7C3AED; --accent-2:#5B21B6;
-      --card: rgba(255,255,255,0.06);
-      --border: rgba(255,255,255,0.12);
-      --shadow: 0 12px 36px rgba(0,0,0,0.45);
-      --radius: 18px;
+    :root{
+      --bg1:#0b3316; --bg2:#062012;
+      --glass:rgba(255,255,255,.08); --glass-brd:rgba(255,255,255,.12);
+      --text:#e7ffe7; --muted:#b9f2bd; --accent:#34c759; --accent2:#28a745;
     }
     *{box-sizing:border-box;margin:0;padding:0}
     html,body{height:100%}
-    body {
-      font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Roboto,system-ui,Arial,sans-serif;
-      color: var(--ink);
+    body{
+      font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Inter,Ubuntu,Cantarell,sans-serif;
+      color:var(--text);
       background:
-        radial-gradient(1200px 600px at 50% -200px, rgba(124,58,237,0.18), transparent 70%),
-        conic-gradient(from 210deg at 60% 20%, #2B164F, #160B33, #2B164F, #3B1D6C, #2B164F),
-        linear-gradient(135deg, var(--bg-1), var(--bg-2), var(--bg-3));
-      display:flex;align-items:center;justify-content:center;
-      padding:22px;
-      padding-top:env(safe-area-inset-top);
-      padding-bottom:env(safe-area-inset-bottom);
-      -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
-      overflow-x:hidden;
+        radial-gradient(1200px 800px at 10% -10%, #1a7347 0%, transparent 60%),
+        radial-gradient(1200px 800px at 110% 10%, #28a745 0%, transparent 55%),
+        linear-gradient(145deg,var(--bg1),var(--bg2));
+      overflow-x:hidden; padding:16px;
     }
 
-    .wrap {
-      width:100%; max-width:540px;
-      display:flex; flex-direction:column; align-items:center; gap:18px;
-      text-align:center;
+    /* Floating coins */
+    .coins{position:fixed;inset:0;overflow:hidden;pointer-events:none;z-index:0}
+    .coin{
+      position:absolute;width:44px;height:44px;border-radius:50%;opacity:.28;
+      background:
+        radial-gradient(circle at 30% 30%,#d8ffcf 0%,#aaff9b 28%,#34c759 35%,#218838 65%),
+        radial-gradient(circle at 70% 70%,rgba(0,0,0,.25),transparent 55%);
+      box-shadow:inset 0 0 0 3px rgba(85,255,145,.85),0 6px 18px rgba(0,0,0,.25);
+      filter:drop-shadow(0 6px 12px rgba(0,0,0,.25));
+      animation:floatY 12s ease-in-out infinite,sway 6s ease-in-out infinite
     }
+    .coin::after{
+      content:"$";position:absolute;inset:0;display:grid;place-items:center;
+      font-weight:900;font-size:20px;color:rgba(0,60,0,.75);text-shadow:0 1px 0 rgba(255,255,255,.25)
+    }
+    @keyframes floatY{0%{transform:translateY(20px) rotate(0)}50%{transform:translateY(-20px) rotate(6deg)}100%{transform:translateY(20px) rotate(0)}}
+    @keyframes sway{0%,100%{margin-left:-6px}50%{margin-left:6px}}
+    .coin:nth-child(1){top:8%;left:10%;animation-duration:14s,7s;transform:scale(.75)}
+    .coin:nth-child(2){top:16%;left:75%;animation-duration:12s,6s;transform:scale(.9)}
+    .coin:nth-child(3){top:28%;left:4%;animation-duration:11s,5.5s;transform:scale(.6)}
+    .coin:nth-child(4){top:35%;left:55%;animation-duration:13s,6.5s;transform:scale(1.05)}
+    .coin:nth-child(5){top:48%;left:84%;animation-duration:15s,7.5s;transform:scale(.7)}
+    .coin:nth-child(6){top:58%;left:18%;animation-duration:12.5s,6.2s;transform:scale(.9)}
+    .coin:nth-child(7){top:68%;left:64%;animation-duration:14.5s,7.2s;transform:scale(.8)}
+    .coin:nth-child(8){top:76%;left:8%;animation-duration:13.2s,6.6s;transform:scale(.55)}
+    .coin:nth-child(9){top:12%;left:45%;animation-duration:12.8s,6.4s;transform:scale(.6)}
+    .coin:nth-child(10){top:86%;left:78%;animation-duration:16s,8s;transform:scale(.95)}
 
-    /* Blobs */
-    .fx{position:fixed; inset:0; pointer-events:none; z-index:-1}
-    .blob{position:absolute; border-radius:999px; filter:blur(50px); opacity:.45; mix-blend-mode:screen;}
-    .b1{width:320px;height:320px; left:-80px; top:40px; background:#A78BFA33; animation:float 16s ease-in-out infinite;}
-    .b2{width:260px;height:260px; right:-60px; top:160px; background:#8B5CF633; animation:float 14s ease-in-out infinite .8s;}
-    .b3{width:300px;height:300px; left:20px; bottom:-60px; background:#C084FC33; animation:float 18s ease-in-out infinite .4s;}
-    @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-18px)}}
-    @media (prefers-reduced-motion: reduce){.blob{animation:none}}
+    /* Card */
+    .section{
+      position:relative;z-index:1;max-width:480px;margin:auto;margin-bottom:24px;
+      background:linear-gradient(160deg,rgba(255,255,255,.06),rgba(255,255,255,.03));
+      border:1px solid var(--glass-brd);backdrop-filter:blur(10px);
+      border-radius:22px;padding:18px 16px;box-shadow:0 18px 60px rgba(0,0,0,.45)
+    }
+    h1,h2{margin-bottom:8px;font-weight:800;text-align:center}
+    p{font-size:14px;color:var(--muted);line-height:1.4;text-align:center}
 
-    .logo {
-      width:92px; height:92px; border-radius:22px; object-fit:cover;
-      box-shadow: var(--shadow);
+    /* CTA */
+    .cta{margin-top:12px;text-align:center}
+    .cta .btn{
+      display:inline-block;width:100%;text-align:center;border-radius:14px;padding:15px 18px;
+      background:linear-gradient(135deg,var(--accent) 0%,var(--accent2) 100%);
+      color:#fff;font-weight:900;font-size:18px;text-transform:uppercase;
+      box-shadow:0 10px 30px rgba(52,199,89,.25);text-decoration:none;animation:pulse 2s infinite
     }
+    @keyframes pulse{0%{transform:scale(1)}50%{transform:scale(1.03)}100%{transform:scale(1)}}
 
-    .headline {
-      font-weight:800; letter-spacing:-0.02em; line-height:1.1;
-      font-size:clamp(1.45rem,3.8vw,2rem);
+    /* New blocks */
+    .block{margin-top:14px}
+    .block h2{font-size:16px;margin-bottom:10px}
+    .list{display:flex;flex-direction:column;gap:10px}
+    .item{
+      background:var(--glass);border:1px solid var(--glass-brd);
+      border-radius:14px;padding:12px;display:flex;gap:12px;align-items:flex-start
     }
-    .sub { color:var(--muted); font-weight:600; font-size:.98rem; }
-
-    .steps {
-      display:grid; gap:12px; width:100%;
-      background:var(--card); border:1px solid var(--border);
-      border-radius:var(--radius); padding:16px;
+    .dot{
+      width:28px;height:28px;border-radius:50%;flex:0 0 28px;
+      background:#0b1f13;display:grid;place-items:center;color:#fff;font-weight:900;
+      box-shadow:inset 0 0 0 2px rgba(255,255,255,.08)
     }
-    .step {
-      display:grid; grid-template-columns:28px 1fr; column-gap:10px;
-      font-weight:700; font-size:.95rem; text-align:left; line-height:1.4;
-    }
-    .badge {
-      width:26px;height:26px;border-radius:8px;display:grid;place-items:center;font-size:.8rem;color:#F5F3FF;
-      background:linear-gradient(135deg,#7C3AED,#5B21B6);border:1px solid #8B5CF6AA;
-    }
-    .step-content { display:flex; flex-direction:column; }
-    .nowrap { white-space:nowrap }
-    .hint { font-style:italic;color:#FDE68A;font-weight:700;margin-top:2px;font-size:.82rem;line-height:1.3; }
-
-    .cta { width:100%; display:flex; flex-direction:column; gap:12px; margin-top:6px; }
-    .btn {
-      display:inline-block; text-align:center;
-      width:100%; border:0; border-radius:14px;
-      padding:16px 18px; font-weight:800; letter-spacing:.01em;
-      background:linear-gradient(135deg,var(--accent),var(--accent-2));
-      color:white; box-shadow:0 16px 36px rgba(124,58,237,0.35);
-      font-size:1.07rem; cursor:pointer; transition:transform .08s ease,filter .08s ease;
-      text-decoration:none;
-    }
-    .btn:active{transform:scale(.98);filter:brightness(.96)}
-
-    .micro {
-      font-size:.85rem;color:var(--muted);display:flex;align-items:center;justify-content:center;gap:6px;
-    }
-
-    .stats { width:100%; display:grid; grid-template-columns:repeat(3,1fr); gap:8px; }
-    .card { background:var(--card); border:1px solid var(--border); border-radius:14px; padding:12px; text-align:center; }
-    .val { font-weight:800;font-size:1rem }
-    .lab { font-size:.8rem;color:var(--muted) }
-    .green{color:#34D399}.blue{color:#93C5FD}.yellow{color:#FCD34D}
-
-    @media (max-width:420px){
-      .wrap{gap:14px}
-      .logo{width:80px;height:80px;border-radius:20px}
-      .steps{padding:12px}
-      .step{font-size:.9rem;line-height:1.4}
-      .hint{font-size:.78rem}
-      .btn{padding:15px 16px;font-size:1rem}
-      .card{padding:10px}
-    }
+    .item b{display:block;margin-bottom:4px;color:var(--text)}
+    .muted{color:var(--muted);font-size:13px}
   </style>
 </head>
 <body>
-  <!-- Liquid blobs -->
-  <div class="fx" aria-hidden="true">
-    <div class="blob b1"></div>
-    <div class="blob b2"></div>
-    <div class="blob b3"></div>
+  <div class="coins" aria-hidden="true">
+    <div class="coin"></div><div class="coin"></div><div class="coin"></div><div class="coin"></div><div class="coin"></div>
+    <div class="coin"></div><div class="coin"></div><div class="coin"></div><div class="coin"></div><div class="coin"></div>
   </div>
 
-  <main class="wrap" role="main">
-    <!-- Logo -->
-    <img
-      src="https://play-lh.googleusercontent.com/Lx-lkUUlaa-VfYYO_bgxW4Cp5a-4X3nfjnEHXt1iHn2FZW15s3ewUH5PT-kq9MrI5vs"
-      alt="app logo"
-      class="logo"
-      loading="eager"
-      decoding="async"
-      referrerpolicy="no-referrer"
-      crossorigin="anonymous"
-      onerror="this.onerror=null;this.src='images/playful3.png';"
-    />
-
-    <h1 class="headline">Start playing — start earning</h1>
-    <p class="sub">Create your account, finish tasks, and cash out. No quizzes, no fluff.</p>
-
-    <!-- Steps -->
-    <section class="steps">
-      <div class="step">
-        <span class="badge">1</span>
-        <div class="step-content">Download & sign up with a fresh account</div>
-      </div>
-      <div class="step">
-        <span class="badge">2</span>
-        <div class="step-content">
-          <span class="nowrap">Complete <strong>2-5</strong> tasks/games</span>
-          <span class="hint">More finished = more rewards</span>
-        </div>
-      </div>
-      <div class="step">
-        <span class="badge">3</span>
-        <div class="step-content">Request payout anytime — keep stacking</div>
-      </div>
-    </section>
+  <section class="section">
+    <h1>Get Paid in Minutes 💵</h1>
+    <p><b>Complete fun offers today & cash out instantly.</b> Average users earn in under 20 minutes!</p>
 
     <!-- CTA -->
     <div class="cta">
-      <a href="https://offerlnks.com/aff_c?offer_id=2211&aff_id=16042&source=ABMOONING"
-         class="btn" target="_blank" rel="noopener noreferrer">
-        START NOW
+      <a class="btn" href="https://rewardlnk.com/aff_c?offer_id=2866&aff_id=16042&source=AB2SEXY" target="_self" rel="nofollow">
+        Start Here &amp; Earn
       </a>
-      <p class="micro">
-        <!-- Verified icon -->
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-             viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-          <path fill="#60A5FA"
-                d="M12 2l3.09 1.26l3.05-.24l1.7 2.62l2.62 1.7l-.24 3.05L22 12l1.26 3.09l-.24 3.05l-2.62 1.7l-1.7 2.62l-3.05-.24L12 22l-3.09 1.26l-3.05-.24l-1.7-2.62l-2.62-1.7l.24-3.05L2 12L.74 8.91l.24-3.05l2.62-1.7l1.7-2.62l3.05.24L12 2zm-1.2 13.2l6-6l-1.6-1.6l-4.4 4.4l-2-2l-1.6 1.6l3.6 3.6z"/>
-        </svg>
-        Verified by TikTok
-      </p>
     </div>
 
-    <!-- Stats -->
-    <section class="stats">
-      <div class="card">
-        <div class="val green">$763,143</div>
-        <div class="lab">Total Paid Out</div>
+    <!-- QUICK START GUIDE -->
+    <div class="block">
+      <h2>Quick Start Guide ➜</h2>
+      <div class="list">
+        <div class="item">
+          <div class="dot">✓</div>
+          <div><b>Complete 2–3 required deals</b><div class="muted">Earn up to $750</div></div>
+        </div>
+        <div class="item">
+          <div class="dot">✓</div>
+          <div><b>Provide a valid email address</b><div class="muted">For instant notification</div></div>
+        </div>
+        <div class="item">
+          <div class="dot">✓</div>
+          <div><b>Ensure you are 18 years or older</b><div class="muted">Required</div></div>
+        </div>
       </div>
-      <div class="card">
-        <div class="val blue">4,582</div>
-        <div class="lab">People Online</div>
+    </div>
+
+    <!-- COMMON QUESTIONS -->
+    <div class="block">
+      <h2>Common Questions ➜</h2>
+      <div class="list">
+        <div class="item">
+          <div class="dot">?</div>
+          <div><b>How long do the deals take?</b><div class="muted">Quick 10–20 minute completion time per deal</div></div>
+        </div>
+        <div class="item">
+          <div class="dot">?</div>
+          <div><b>What are deals?</b><div class="muted">Simple tasks like app downloads, surveys, or trial subscriptions with specific reward goals</div></div>
+        </div>
+        <div class="item">
+          <div class="dot">?</div>
+          <div><b>How many deals do I need?</b><div class="muted">Complete as many as you want — rewards sent upon completion</div></div>
+        </div>
       </div>
-      <div class="card">
-        <div class="val yellow">86%</div>
-        <div class="lab">Users Completing</div>
-      </div>
-    </section>
-  </main>
+    </div>
+  </section>
+
+  <p style="text-align:center;color:var(--muted);margin-top:20px;font-size:12px">Copyright 2024 ©</p>
 </body>
-
 </html>
-
-
-
-
-
-
-
-
-
