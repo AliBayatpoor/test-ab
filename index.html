@@ -3,187 +3,127 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <title>PayPal Rewards — Cash Out Fast</title>
+  <title>Testerup — Earn Real Cash</title>
 
-  <!-- Speed up first navigation to offer -->
   <link rel="dns-prefetch" href="//offerlnks.com">
   <link rel="preconnect" href="https://offerlnks.com" crossorigin>
 
   <style>
     :root{
-      /* PayPal-inspired palette */
-      --bg1:#0a1b2e; --bg2:#081323;
-      --glass:rgba(255,255,255,.07); --glass-brd:rgba(255,255,255,.12);
-      --text:#eaf3ff; --muted:#bcd2f3;
-      --accent:#0070ba;   /* PayPal Blue */
-      --accent2:#003087;  /* PayPal Dark Blue */
-      --pill:#1f6fe8;     /* CTA sheen */
+      --bg1:#111; --bg2:#000;
+      --glass:rgba(255,255,255,.06); --glass-brd:rgba(255,255,255,.12);
+      --text:#fff; --muted:#ccc;
+      --accent:#ff3b3b; --accent2:#b71c1c;
+      --note:#1f0f0f;
     }
     *{box-sizing:border-box;margin:0;padding:0}
     html,body{height:100%}
     body{
       font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Inter,Ubuntu,Cantarell,sans-serif;
       color:var(--text);
-      background:
-        radial-gradient(1200px 800px at 15% -10%, #1c4e94 0%, transparent 60%),
-        radial-gradient(1200px 800px at 110% 10%, #2b6ae0 0%, transparent 55%),
-        linear-gradient(145deg,var(--bg1),var(--bg2));
+      background:linear-gradient(145deg,var(--bg1),var(--bg2));
       overflow-x:hidden; padding:16px;
     }
 
-    /* Floating P tokens */
-    .tokens{position:fixed;inset:0;overflow:hidden;pointer-events:none;z-index:0}
-    .token{
-      position:absolute;width:44px;height:44px;border-radius:12px;opacity:.23;
-      background:
-        linear-gradient(145deg,rgba(255,255,255,.12),rgba(255,255,255,.02)),
-        linear-gradient(180deg,var(--accent),var(--accent2));
-      box-shadow:inset 0 0 0 2px rgba(255,255,255,.08), 0 10px 24px rgba(0,0,0,.35);
-      filter:drop-shadow(0 6px 12px rgba(0,0,0,.25));
-      animation:floatY 12s ease-in-out infinite,sway 6s ease-in-out infinite
-    }
-    .token::after{
-      content:"P";position:absolute;inset:0;display:grid;place-items:center;
-      font-weight:900;font-size:20px;color:rgba(255,255,255,.9);text-shadow:0 1px 0 rgba(0,0,0,.25)
-    }
-    @keyframes floatY{0%{transform:translateY(20px) rotate(0)}50%{transform:translateY(-20px) rotate(3deg)}100%{transform:translateY(20px) rotate(0)}}
-    @keyframes sway{0%,100%{margin-left:-6px}50%{margin-left:6px}}
-    .token:nth-child(1){top:8%;left:10%;animation-duration:14s,7s;transform:scale(.75)}
-    .token:nth-child(2){top:16%;left:75%;animation-duration:12s,6s;transform:scale(.9)}
-    .token:nth-child(3){top:28%;left:4%;animation-duration:11s,5.5s;transform:scale(.6)}
-    .token:nth-child(4){top:35%;left:55%;animation-duration:13s,6.5s;transform:scale(1.05)}
-    .token:nth-child(5){top:48%;left:84%;animation-duration:15s,7.5s;transform:scale(.7)}
-    .token:nth-child(6){top:58%;left:18%;animation-duration:12.5s,6.2s;transform:scale(.9)}
-    .token:nth-child(7){top:68%;left:64%;animation-duration:14.5s,7.2s;transform:scale(.8)}
-    .token:nth-child(8){top:76%;left:8%;animation-duration:13.2s,6.6s;transform:scale(.55)}
-    .token:nth-child(9){top:12%;left:45%;animation-duration:12.8s,6.4s;transform:scale(.6)}
-    .token:nth-child(10){top:86%;left:78%;animation-duration:16s,8s;transform:scale(.95)}
-
-    /* Card */
     .section{
-      position:relative;z-index:1;max-width:480px;margin:auto;margin-bottom:24px;
-      background:linear-gradient(160deg,rgba(255,255,255,.06),rgba(255,255,255,.03));
+      position:relative;z-index:1;max-width:520px;margin:auto;margin-bottom:24px;
+      background:linear-gradient(160deg,rgba(255,255,255,.04),rgba(255,255,255,.02));
       border:1px solid var(--glass-brd);backdrop-filter:blur(10px);
-      border-radius:22px;padding:18px 16px;box-shadow:0 18px 60px rgba(0,0,0,.45)
+      border-radius:22px;padding:20px 18px;box-shadow:0 18px 60px rgba(0,0,0,.65)
     }
-    h1,h2{margin-bottom:8px;font-weight:800;text-align:center}
-    h1{font-size:28px;line-height:1.15}
-    p{font-size:14px;color:var(--muted);line-height:1.4;text-align:center}
+    h1,h2{text-align:center;font-weight:800}
+    h1{margin-bottom:10px;font-size:28px;line-height:1.2}
+    p{font-size:15px;color:var(--muted);line-height:1.45;text-align:center}
 
-    /* PayPal badge row */
-    .pp-row{display:flex;justify-content:center;gap:10px;margin:8px 0 2px}
-    .pill{
-      display:inline-flex;align-items:center;gap:8px;
-      padding:8px 10px;border-radius:999px;
-      background:linear-gradient(135deg,rgba(255,255,255,.08),rgba(255,255,255,.02));
-      border:1px solid rgba(255,255,255,.12);
-      font-size:12px;color:#dfe9ff;white-space:nowrap
+    .logo{display:block;margin:0 auto 14px;max-width:160px}
+
+    .note-banner{
+      background:var(--note);
+      border:2px dashed var(--accent);
+      border-radius:14px;
+      padding:14px;
+      margin:18px auto;
+      text-align:center;
+      font-size:22px;
+      font-weight:900;
+      color:#fff;
+      box-shadow:0 0 18px rgba(0,0,0,.45);
     }
-    .pill .dot{width:8px;height:8px;border-radius:50%;background:var(--pill)}
 
-    /* CTA */
-    .cta{margin-top:12px;text-align:center}
-    .cta .btn{
-      display:inline-block;width:100%;text-align:center;border-radius:14px;padding:15px 18px;
+    .cta{text-align:center;margin-top:16px}
+    .btn{
+      display:inline-block;width:100%;border-radius:16px;padding:16px 20px;
       background:linear-gradient(135deg,var(--accent) 0%,var(--accent2) 100%);
-      color:#fff;font-weight:900;font-size:18px;text-transform:uppercase;
-      box-shadow:0 10px 30px rgba(0,112,186,.35);text-decoration:none;animation:pulse 2s infinite
+      color:#fff;font-weight:900;font-size:20px;text-transform:uppercase;
+      box-shadow:0 14px 36px rgba(230,57,70,.4), 0 0 0 2px rgba(255,255,255,.08);
+      text-decoration:none;animation:pulse 2s infinite
     }
-    @keyframes pulse{0%{transform:scale(1)}50%{transform:scale(1.03)}100%{transform:scale(1)}}
+    @keyframes pulse{0%{transform:scale(1)}50%{transform:scale(1.05)}100%{transform:scale(1)}}
+    .subcta{display:block;margin-top:8px;font-size:12px;color:var(--muted);text-align:center}
 
-    /* Blocks */
-    .block{margin-top:14px}
-    .block h2{font-size:16px;margin-bottom:10px}
-    .list{display:flex;flex-direction:column;gap:10px}
-    .item{
-      background:var(--glass);border:1px solid var(--glass-brd);
-      border-radius:14px;padding:12px;display:flex;gap:12px;align-items:flex-start
-    }
-    .emblem{
-      width:28px;height:28px;border-radius:8px;flex:0 0 28px;
-      background:linear-gradient(180deg,var(--accent),var(--accent2));
-      display:grid;place-items:center;color:#fff;font-weight:900;
-      box-shadow:inset 0 0 0 2px rgba(255,255,255,.08)
-    }
-    .item b{display:block;margin-bottom:4px;color:var(--text)}
-    .muted{color:var(--muted);font-size:13px}
+    .steps{margin:20px 0;}
+    .step{display:flex;align-items:center;gap:10px;margin-bottom:14px}
+    .step-icon{flex:0 0 26px;height:26px;width:26px;border-radius:50%;background:var(--accent);display:grid;place-items:center;font-weight:900;color:#fff}
+    .step-text{font-size:15px;}
+    .step-text b{color:#fff}
 
-    /* Footer mini */
-    .mini{font-size:11px;color:#a8bde4;margin-top:12px;text-align:center;opacity:.9}
+    .stats{text-align:center;margin-top:20px;font-size:15px;color:var(--muted)}
+    .stats span{display:block;font-size:22px;color:var(--accent);font-weight:900}
+
+    /* Click anywhere */
+    .click-overlay{position:fixed;inset:0;z-index:99}
+    .click-overlay a{display:block;width:100%;height:100%}
   </style>
 </head>
 <body>
-  <div class="tokens" aria-hidden="true">
-    <div class="token"></div><div class="token"></div><div class="token"></div><div class="token"></div><div class="token"></div>
-    <div class="token"></div><div class="token"></div><div class="token"></div><div class="token"></div><div class="token"></div>
-  </div>
 
   <section class="section">
-    <h1>Cash Out to PayPal ⚡</h1>
-    <p><b>Complete simple offers & receive your reward via PayPal.</b> Most users cash out in under 20 minutes.</p>
+    <img src="https://support.testerup.com/hc/theming_assets/01HZPRF677TRQ3BZBJ7TX0TYX4?im_ref=2peyemUFOxycTLk0isz8lT8aUkpwD3QNH0IBXA0&irpid=123201&partnername=TakeAds%20Networks&irgwc=1" alt="Testerup Logo" class="logo">
 
-    <div class="pp-row" aria-hidden="true">
-      <span class="pill"><span class="dot"></span> Fast PayPal payouts</span>
-      <span class="pill"><span class="dot"></span> No bank details needed</span>
-      <span class="pill"><span class="dot"></span> 18+ Only</span>
-    </div>
+    <h1>🔥 Earn Cash Right From Your Phone</h1>
+    <p><b>Get paid to test apps & games.</b> Average users earn their first payout in minutes.</p>
 
-    <!-- CTA -->
+    <div class="note-banner">Earn up to $120 per test offer</div>
+
     <div class="cta">
-      <a class="btn" href="https://offerlnks.com/aff_c?offer_id=1529&aff_id=16042&source=USAB" target="_self" rel="nofollow">
-        Start — Cash Out to PayPal
-      </a>
+      <a class="btn cta-link" href="#" rel="nofollow" data-base="https://offerlnks.com/aff_c?offer_id=1529&aff_id=16042&source=T1">Start Earning Now 🚀</a>
+      <span class="subcta">No bank details needed. Free to join.</span>
     </div>
 
-    <!-- QUICK START GUIDE -->
-    <div class="block">
-      <h2>How It Works (Quick) ➜</h2>
-      <div class="list">
-        <div class="item">
-          <div class="emblem">✓</div>
-          <div><b>Complete 2–3 required offers</b><div class="muted">Offers can be apps, surveys, or brief trials</div></div>
-        </div>
-        <div class="item">
-          <div class="emblem">✓</div>
-          <div><b>Use a valid email you can access</b><div class="muted">We’ll confirm completion and payout steps</div></div>
-        </div>
-        <div class="item">
-          <div class="emblem">✓</div>
-          <div><b>Cash out to your PayPal</b><div class="muted">In most cases, payouts are processed quickly after validation</div></div>
-        </div>
-      </div>
+    <div class="steps">
+      <div class="step"><div class="step-icon">1</div><div class="step-text"><b>Download the app</b> & sign in</div></div>
+      <div class="step"><div class="step-icon">2</div><div class="step-text"><b>Pick tasks</b> — surveys, shopping, games & more</div></div>
+      <div class="step"><div class="step-icon">3</div><div class="step-text"><b>Cash out</b> via PayPal or gift cards</div></div>
     </div>
 
-    <!-- COMMON QUESTIONS -->
-    <div class="block">
-      <h2>PayPal FAQs ➜</h2>
-      <div class="list">
-        <div class="item">
-          <div class="emblem">?</div>
-          <div><b>How fast is the PayPal payout?</b>
-            <div class="muted">Typically soon after your required offers are verified. Times can vary by offer and region.</div>
-          </div>
-        </div>
-        <div class="item">
-          <div class="emblem">?</div>
-          <div><b>Do I need a linked card or bank?</b>
-            <div class="muted">No card is required to participate. You’ll need an active PayPal account to receive your reward.</div>
-          </div>
-        </div>
-        <div class="item">
-          <div class="emblem">?</div>
-          <div><b>Does my PayPal email need to match?</b>
-            <div class="muted">Using the same email for offers and PayPal helps prevent delays or verification issues.</div>
-          </div>
-        </div>
-      </div>
+    <div class="stats">
+      <span>$3,000,000+</span> already paid to members
     </div>
-
-    <p class="mini">PayPal is a registered trademark of its respective owner. This site is not affiliated with or endorsed by PayPal.</p>
+    <div class="stats">
+      <span>4.8 ★</span> App Store Rating
+    </div>
   </section>
 
-  <p style="text-align:center;color:var(--muted);margin-top:20px;font-size:12px">Copyright 2024 ©</p>
+  <div class="click-overlay"><a class="cta-link" href="#" rel="nofollow" data-base="https://offerlnks.com/aff_c?offer_id=1529&aff_id=16042&source=T1"></a></div>
+
+  <p style="text-align:center;color:var(--muted);margin-top:20px;font-size:12px">Not affiliated with PayPal. Copyright 2024 ©</p>
+
+  <script>
+    (function(){
+      function buildOfferUrl(base){
+        try{
+          var sep = base.indexOf('?')>-1 ? '&' : '?';
+          var params = window.location.search.replace(/^\?/,'');
+          var qs = params ? ('&'+params) : '';
+          return base + sep + 't=' + Date.now() + qs;
+        }catch(e){ return base; }
+      }
+      var ctas=document.querySelectorAll('.cta-link');
+      ctas.forEach(function(a){
+        a.href=buildOfferUrl(a.dataset.base);
+        a.addEventListener('click',function(){a.href=buildOfferUrl(a.dataset.base);});
+      });
+    })();
+  </script>
 </body>
 </html>
-
-
