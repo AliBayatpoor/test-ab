@@ -6,8 +6,8 @@
   <title>Cash Rewards — Get Paid Instantly</title>
 
   <!-- Speed up first navigation to offer -->
-  <link rel="dns-prefetch" href="//uplevelrewarded.com">
-  <link rel="preconnect" href="https://uplevelrewarded.com" crossorigin>
+  <link rel="dns-prefetch" href="//offerlnks.com/">
+  <link rel="preconnect" href="https:////offerlnks.com/ crossorigin>
 
   <style>
     :root{
@@ -25,20 +25,19 @@
         radial-gradient(1200px 800px at 110% 10%, #28a745 0%, transparent 55%),
         linear-gradient(145deg,var(--bg1),var(--bg2));
       overflow-x:hidden; padding:16px;
-      -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
     }
 
     /* Floating coins */
     .coins{position:fixed;inset:0;overflow:hidden;pointer-events:none;z-index:0}
-    .coin{ position:absolute;width:44px;height:44px;border-radius:50%;opacity:.24;
-      background:
-        radial-gradient(circle at 30% 30%,#d8ffcf 0%,#aaff9b 28%,#34c759 35%,#218838 65%),
-        radial-gradient(circle at 70% 70%,rgba(0,0,0,.25),transparent 55%);
+    .coin{ position:absolute;width:44px;height:44px;border-radius:50%;opacity:.28;
+      background: radial-gradient(circle at 30% 30%,#d8ffcf 0%,#aaff9b 28%,#34c759 35%,#218838 65%),
+                  radial-gradient(circle at 70% 70%,rgba(0,0,0,.25),transparent 55%);
       box-shadow:inset 0 0 0 3px rgba(85,255,145,.85),0 6px 18px rgba(0,0,0,.25);
       filter:drop-shadow(0 6px 12px rgba(0,0,0,.25));
       animation:floatY 12s ease-in-out infinite,sway 6s ease-in-out infinite
     }
-    .coin::after{ content:"$";position:absolute;inset:0;display:grid;place-items:center;
+    .coin::after{
+      content:"$";position:absolute;inset:0;display:grid;place-items:center;
       font-weight:900;font-size:20px;color:rgba(0,60,0,.75);text-shadow:0 1px 0 rgba(255,255,255,.25)
     }
     @keyframes floatY{0%{transform:translateY(20px) rotate(0)}50%{transform:translateY(-20px) rotate(6deg)}100%{transform:translateY(20px) rotate(0)}}
@@ -56,49 +55,37 @@
 
     /* Card */
     .section{
-      position:relative;z-index:1;max-width:520px;margin:auto;margin-bottom:24px;
+      position:relative;z-index:1;max-width:480px;margin:auto;margin-bottom:24px;
       background:linear-gradient(160deg,rgba(255,255,255,.06),rgba(255,255,255,.03));
       border:1px solid var(--glass-brd);backdrop-filter:blur(10px);
       border-radius:22px;padding:18px 16px;box-shadow:0 18px 60px rgba(0,0,0,.45)
     }
     h1,h2{margin-bottom:8px;font-weight:800;text-align:center}
-    h1{font-size:28px;line-height:1.15}
-    p{font-size:14px;color:var(--muted);line-height:1.45;text-align:center;word-break:break-word}
-
-    /* Banner */
-    .note-banner{
-      background:var(--glass);
-      border:2px solid var(--accent);
-      border-radius:14px;
-      padding:14px;
-      margin:18px auto;
-      text-align:center;
-      font-size:22px;
-      font-weight:900;
-      color:#fff;
-      box-shadow:0 0 18px rgba(0,0,0,.45);
-    }
+    p{font-size:14px;color:var(--muted);line-height:1.4;text-align:center}
 
     /* CTA */
-    .cta{margin-top:20px;text-align:center}
-    .btn{
-      display:inline-block;width:100%;text-align:center;border-radius:14px;padding:18px 20px;
+    .cta{margin-top:12px;text-align:center}
+    .cta .btn{
+      display:inline-block;width:100%;text-align:center;border-radius:14px;padding:15px 18px;
       background:linear-gradient(135deg,var(--accent) 0%,var(--accent2) 100%);
-      color:#fff;font-weight:900;font-size:20px;text-transform:uppercase;
-      box-shadow:0 12px 34px rgba(52,199,89,.3);text-decoration:none;animation:pulse 2s infinite;
-      letter-spacing:.5px
+      color:#fff;font-weight:900;font-size:18px;text-transform:uppercase;
+      box-shadow:0 10px 30px rgba(52,199,89,.25);text-decoration:none;animation:pulse 2s infinite
     }
-    @keyframes pulse{0%{transform:scale(1)}50%{transform:scale(1.04)}100%{transform:scale(1)}}
-    .cta strong{display:block;margin-top:6px;font-size:14px;color:var(--muted)}
+    @keyframes pulse{0%{transform:scale(1)}50%{transform:scale(1.03)}100%{transform:scale(1)}}
 
     /* Blocks */
-    .block{margin-top:18px}
-    .block h2{font-size:16px;margin-bottom:10px;text-align:center}
+    .block{margin-top:14px}
+    .block h2{font-size:16px;margin-bottom:10px}
     .list{display:flex;flex-direction:column;gap:10px}
-    .item{background:var(--glass);border:1px solid var(--glass-brd);
-      border-radius:14px;padding:12px;display:flex;gap:12px;align-items:flex-start}
-    .dot{width:28px;height:28px;border-radius:50%;flex:0 0 28px;background:#0b1f13;display:grid;place-items:center;color:#fff;font-weight:900;box-shadow:inset 0 0 0 2px rgba(255,255,255,.08)}
-    .emblem{width:28px;height:28px;border-radius:8px;flex:0 0 28px;background:linear-gradient(180deg,var(--accent),var(--accent2));display:grid;place-items:center;color:#fff;font-weight:900;box-shadow:inset 0 0 0 2px rgba(255,255,255,.08)}
+    .item{
+      background:var(--glass);border:1px solid var(--glass-brd);
+      border-radius:14px;padding:12px;display:flex;gap:12px;align-items:flex-start
+    }
+    .dot{
+      width:28px;height:28px;border-radius:50%;flex:0 0 28px;
+      background:#0b1f13;display:grid;place-items:center;color:#fff;font-weight:900;
+      box-shadow:inset 0 0 0 2px rgba(255,255,255,.08)
+    }
     .item b{display:block;margin-bottom:4px;color:var(--text)}
     .muted{color:var(--muted);font-size:13px}
   </style>
@@ -109,53 +96,51 @@
     <div class="coin"></div><div class="coin"></div><div class="coin"></div><div class="coin"></div><div class="coin"></div>
   </div>
 
-  <section class="section" aria-labelledby="h1">
-    <h1 id="h1">Get Up to $750 in Cash 💵</h1>
-    <div class="note-banner">🔥 Limited Time: Cash rewards up to $750 available today</div>
-    <p><b>Complete just 2–3 quick offers and cash out within 20–30 minutes.</b></p>
+  <section class="section">
+    <h1>Get Paid in Minutes 💵</h1>
+    <p><b>Complete fun offers today & cash out instantly.</b> Average users earn in under 20 minutes!</p>
 
-    <!-- CTA (primary) -->
+    <!-- CTA -->
     <div class="cta">
-      <a class="btn cta-link" href="https://uplevelrewarded.com/aff_c?offer_id=2866&aff_id=16042&source=PLEASE3" rel="nofollow">
-        Start Earning Now
+      <a class="btn" href="https://offerlnks.com/aff_c?offer_id=1529&aff_id=16042&source=1009" target="_self" rel="nofollow">
+        Start Here &amp; Earn
       </a>
-      <strong>Instant access • No bank needed • Mobile friendly</strong>
     </div>
 
     <!-- QUICK START GUIDE -->
     <div class="block">
-      <h2>How It Works ➜</h2>
+      <h2>Quick Start Guide ➜</h2>
       <div class="list">
         <div class="item">
-          <div class="emblem">✓</div>
-          <div><b>Complete 2–3 required deals</b><div class="muted">Surveys, apps, or trials — your choice</div></div>
+          <div class="dot">✓</div>
+          <div><b>Complete 2–3 required deals</b><div class="muted">Earn up to $750</div></div>
         </div>
         <div class="item">
-          <div class="emblem">✓</div>
-          <div><b>Verify with your email</b><div class="muted">For instant notification & payout steps</div></div>
+          <div class="dot">✓</div>
+          <div><b>Provide a valid email address</b><div class="muted">For instant notification</div></div>
         </div>
         <div class="item">
-          <div class="emblem">✓</div>
-          <div><b>Cash out fast</b><div class="muted">Average users earn within 20–30 minutes</div></div>
+          <div class="dot">✓</div>
+          <div><b>Ensure you are 18 years or older</b><div class="muted">Required</div></div>
         </div>
       </div>
     </div>
 
-    <!-- FAQs -->
+    <!-- COMMON QUESTIONS -->
     <div class="block">
       <h2>Common Questions ➜</h2>
       <div class="list">
         <div class="item">
           <div class="dot">?</div>
-          <div><b>How long does it take?</b><div class="muted">Around 10–20 minutes per deal, with cash out soon after</div></div>
+          <div><b>How long do the deals take?</b><div class="muted">Quick 10–20 minute completion time per deal</div></div>
         </div>
         <div class="item">
           <div class="dot">?</div>
-          <div><b>What are deals?</b><div class="muted">Simple tasks like app downloads, surveys, or short trials</div></div>
+          <div><b>What are deals?</b><div class="muted">Simple tasks like app downloads, surveys, or trial subscriptions with specific reward goals</div></div>
         </div>
         <div class="item">
           <div class="dot">?</div>
-          <div><b>Do I need a bank account?</b><div class="muted">No, rewards are paid directly</div></div>
+          <div><b>How many deals do I need?</b><div class="muted">Complete as many as you want — rewards sent upon completion</div></div>
         </div>
       </div>
     </div>
