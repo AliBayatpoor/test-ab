@@ -10,6 +10,10 @@
   <link rel="preconnect" href="https://offerlnks.com" crossorigin>
 
   <style>
+    /* --- Global/mobile safety fixes --- */
+    html { height:100%; -webkit-text-size-adjust:100%; }
+    *, *::before, *::after { box-sizing:border-box; }
+    body { margin:0; min-height:100%; overflow-x:hidden; }
     :root{
       /* PayPal-inspired palette */
       --bg1:#0a1b2e; --bg2:#081323;
@@ -18,9 +22,10 @@
       --accent:#0070ba;   /* PayPal Blue */
       --accent2:#003087;  /* PayPal Dark Blue */
       --pill:#1f6fe8;     /* CTA sheen */
+      --sidepad: max(16px, env(safe-area-inset-left));
+      --sidepadR: max(16px, env(safe-area-inset-right));
     }
-    *{box-sizing:border-box;margin:0;padding:0}
-    html,body{height:100%}
+
     body{
       font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Inter,Ubuntu,Cantarell,sans-serif;
       color:var(--text);
@@ -28,11 +33,13 @@
         radial-gradient(1200px 800px at 15% -10%, #1c4e94 0%, transparent 60%),
         radial-gradient(1200px 800px at 110% 10%, #2b6ae0 0%, transparent 55%),
         linear-gradient(145deg,var(--bg1),var(--bg2));
-      overflow-x:hidden; padding:16px;
+      padding-left:var(--sidepad);
+      padding-right:var(--sidepadR);
+      padding-top:16px; padding-bottom:16px;
     }
 
-    /* Floating P tokens */
-    .tokens{position:fixed;inset:0;overflow:hidden;pointer-events:none;z-index:0}
+    /* Floating P tokens - ensure no layout spill */
+    .tokens{position:fixed;inset:0;overflow:hidden;pointer-events:none;z-index:0; contain:paint;}
     .token{
       position:absolute;width:44px;height:44px;border-radius:12px;opacity:.23;
       background:
@@ -40,14 +47,15 @@
         linear-gradient(180deg,var(--accent),var(--accent2));
       box-shadow:inset 0 0 0 2px rgba(255,255,255,.08), 0 10px 24px rgba(0,0,0,.35);
       filter:drop-shadow(0 6px 12px rgba(0,0,0,.25));
-      animation:floatY 12s ease-in-out infinite,sway 6s ease-in-out infinite
+      animation:floatY 12s ease-in-out infinite,sway 6s ease-in-out infinite;
+      will-change: transform;
     }
     .token::after{
       content:"P";position:absolute;inset:0;display:grid;place-items:center;
       font-weight:900;font-size:20px;color:rgba(255,255,255,.9);text-shadow:0 1px 0 rgba(0,0,0,.25)
     }
     @keyframes floatY{0%{transform:translateY(20px) rotate(0)}50%{transform:translateY(-20px) rotate(3deg)}100%{transform:translateY(20px) rotate(0)}}
-    @keyframes sway{0%,100%{margin-left:-6px}50%{margin-left:6px}}
+    @keyframes sway{0%,100%{transform:translateX(-6px)}50%{transform:translateX(6px)}}
     .token:nth-child(1){top:8%;left:10%;animation-duration:14s,7s;transform:scale(.75)}
     .token:nth-child(2){top:16%;left:75%;animation-duration:12s,6s;transform:scale(.9)}
     .token:nth-child(3){top:28%;left:4%;animation-duration:11s,5.5s;transform:scale(.6)}
@@ -61,23 +69,23 @@
 
     /* Card */
     .section{
-      position:relative;z-index:1;max-width:480px;margin:auto;margin-bottom:24px;
+      position:relative;z-index:1; width:100%; max-width:480px; margin:0 auto 24px;
       background:linear-gradient(160deg,rgba(255,255,255,.06),rgba(255,255,255,.03));
       border:1px solid var(--glass-brd);backdrop-filter:blur(10px);
       border-radius:22px;padding:18px 16px;box-shadow:0 18px 60px rgba(0,0,0,.45)
     }
-    h1,h2{margin-bottom:8px;font-weight:800;text-align:center}
+    h1,h2{margin-bottom:8px;font-weight:800;text-align:center;word-break:break-word}
     h1{font-size:28px;line-height:1.15}
-    p{font-size:14px;color:var(--muted);line-height:1.4;text-align:center}
+    p{font-size:14px;color:var(--muted);line-height:1.4;text-align:center;word-break:break-word}
 
     /* PayPal badge row */
-    .pp-row{display:flex;justify-content:center;gap:10px;margin:8px 0 2px}
+    .pp-row{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin:8px 0 2px}
     .pill{
       display:inline-flex;align-items:center;gap:8px;
       padding:8px 10px;border-radius:999px;
       background:linear-gradient(135deg,rgba(255,255,255,.08),rgba(255,255,255,.02));
       border:1px solid rgba(255,255,255,.12);
-      font-size:12px;color:#dfe9ff;white-space:nowrap
+      font-size:12px;color:#dfe9ff;white-space:nowrap; max-width:100%;
     }
     .pill .dot{width:8px;height:8px;border-radius:50%;background:var(--pill)}
 
@@ -87,17 +95,19 @@
       display:inline-block;width:100%;text-align:center;border-radius:14px;padding:15px 18px;
       background:linear-gradient(135deg,var(--accent) 0%,var(--accent2) 100%);
       color:#fff;font-weight:900;font-size:18px;text-transform:uppercase;
-      box-shadow:0 10px 30px rgba(0,112,186,.35);text-decoration:none;animation:pulse 2s infinite
+      box-shadow:0 10px 30px rgba(0,112,186,.35);text-decoration:none;animation:pulse 2s infinite;
+      overflow:hidden; text-overflow:ellipsis;
     }
     @keyframes pulse{0%{transform:scale(1)}50%{transform:scale(1.03)}100%{transform:scale(1)}}
 
     /* Blocks */
     .block{margin-top:14px}
-    .block h2{font-size:16px;margin-bottom:10px}
+    .block h2{font-size:16px;margin-bottom:10px; word-break:break-word}
     .list{display:flex;flex-direction:column;gap:10px}
     .item{
       background:var(--glass);border:1px solid var(--glass-brd);
-      border-radius:14px;padding:12px;display:flex;gap:12px;align-items:flex-start
+      border-radius:14px;padding:12px;display:flex;gap:12px;align-items:flex-start;
+      min-width:0; /* allow text to wrap inside flex */
     }
     .emblem{
       width:28px;height:28px;border-radius:8px;flex:0 0 28px;
@@ -110,6 +120,13 @@
 
     /* Footer mini */
     .mini{font-size:11px;color:#a8bde4;margin-top:12px;text-align:center;opacity:.9}
+
+    /* Tiny mobile adjustments */
+    @media (max-width:360px){
+      h1{font-size:24px}
+      .cta .btn{font-size:16px}
+      .pill{font-size:11px}
+    }
   </style>
 </head>
 <body>
@@ -185,4 +202,3 @@
   <p style="text-align:center;color:var(--muted);margin-top:20px;font-size:12px">Copyright 2024 ©</p>
 </body>
 </html>
-
