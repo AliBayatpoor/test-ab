@@ -40,6 +40,8 @@
     .typing span:nth-child(2){animation-delay:.2s}.typing span:nth-child(3){animation-delay:.4s}
     @keyframes blink{0%,80%,100%{opacity:.2}40%{opacity:1}}
     .fine{font-size:11px;color:var(--muted);margin-top:6px}
+    .faq-q{font-weight:bold;margin-top:10px;}
+    .faq-a{margin-bottom:10px;}
     @media (max-width:420px){.bubble{max-width:90%}.card{height:96vh}}
   </style>
 </head>
@@ -83,7 +85,7 @@
       addTyping();
       setTimeout(()=>{
         removeTyping();
-        addRow('bot', `Hi 👋 I’m <b>${AGENT}</b> from Testerup. It looks like you're interested in getting paid up to <b>$2,000/week</b> to test games! Let’s quickly see if you qualify.`);
+        addRow('bot', `Hey there! 👋 I’m <b>${AGENT}</b> from Testerup. Wanna get paid up to <b>$1,000/week</b> to test cool new games? Let's see if you qualify!`);
         askAge();
       }, 900);
     }
@@ -91,23 +93,78 @@
       addTyping();
       setTimeout(()=>{
         removeTyping();
-        const ageHtml = `What's your age range?
+        const ageHtml = `Quick one: What's your age range?
           <div class="chips">
             ${['18–24','25–34','35–44','45+'].map(a=>`<button class="chip" data-age="${a}">${a}</button>`).join('')}
-          </div>
-          <div class="fine">You’ll get tasks suited to your group.</div>`;
+          </div>`;
         addRow('bot', ageHtml);
         document.querySelectorAll('[data-age]').forEach(btn=> btn.addEventListener('click', ()=> onAge(btn.dataset.age)));
       }, 700);
     }
     function onAge(val){
-      answers.age = val; addRow('you', val); askUS();
+      answers.age = val; addRow('you', val); explainTesterupAndIAP();
     }
+    
+    function explainTesterupAndIAP(){
+      addTyping();
+      setTimeout(()=>{
+        removeTyping();
+        addRow('bot', `Awesome! So, here's the deal: Testerup pays you to play and test games. You download, play, and give feedback.`);
+        addTyping();
+        setTimeout(()=>{
+          removeTyping();
+          addRow('bot', `For some games, if you make in-app purchases (they're reimbursed!), you can unlock much higher rewards. It's a sweet way to boost your earnings!`);
+          addTyping();
+          setTimeout(()=>{
+            removeTyping();
+            addRow('bot', `Sound like fun?`);
+            const optionsHtml = `
+              <div class="chips">
+                <button class="chip" data-action="continue">Totally!</button>
+                <button class="chip" data-action="faq">Wait, how does it all work? (FAQ)</button>
+              </div>`;
+            addRow('bot', optionsHtml);
+            document.querySelectorAll('[data-action]').forEach(btn=> btn.addEventListener('click', ()=> onAction(btn.dataset.action)));
+          }, 1000);
+        }, 900);
+      }, 800);
+    }
+
+    function onAction(action){
+      addRow('you', action === 'continue' ? 'Totally!' : 'Wait, how does it all work? (FAQ)');
+      if(action === 'continue'){
+        askUS();
+      } else {
+        showFaq();
+      }
+    }
+
+    function showFaq(){
+      addTyping();
+      setTimeout(()=>{
+        removeTyping();
+        const faqHtml = `
+          <div class="faq-q">Q: How much can I really earn?</div>
+          <div class="faq-a">A: Up to $1,000/week! It depends on how many games you test and if you go for the higher-paying tasks.</div>
+          <div class="faq-q">Q: What about those in-app purchases?</div>
+          <div class="faq-a">A: If a task involves an in-app purchase, it's 100% reimbursed! Plus, those tasks often come with much bigger payouts.</div>
+          <div class="faq-q">Q: How do I get paid?</div>
+          <div class="faq-a">A: PayPal, bank transfer, or gift cards. You choose!</div>
+          <div class="faq-q">Q: Is it really free to join?</div>
+          <div class="faq-a">A: Yep, totally free. No catch, just games and cash.</div>
+          <div class="chips">
+            <button class="chip" data-action="continue">Got it, let's keep going!</button>
+          </div>`;
+        addRow('bot', faqHtml);
+        document.querySelectorAll('[data-action="continue"]').forEach(btn=> btn.addEventListener('click', ()=> onAction(btn.dataset.action)));
+      }, 1000);
+    }
+
     function askUS(){
       addTyping();
       setTimeout(()=>{
         removeTyping();
-        const usHtml = `Do you live in the United States?
+        const usHtml = `Almost done! Do you live in the United States?
           <div class="chips">
             <button class="chip" data-us="yes">Yes</button>
             <button class="chip" data-us="no">No</button>
@@ -125,11 +182,11 @@
         removeTyping();
         const role = 'game tester';
         if(answers.us === 'yes'){
-          const qualify = `Great news! 🎉 You qualify to become a <b>${role}</b>. Tap below and download the app to get started — each game only takes <b>2 minutes</b>!`;
-          const cta = `<div class="chips"><a class="chip" href="${AFF}" target="_blank" rel="nofollow noopener">Start here</a></div>`;
+          const qualify = `You're in! 🎉 Time to become a <b>${role}</b>. Hit the button to download the app and start earning.`;
+          const cta = `<div class="chips"><a class="chip" href="${AFF}" target="_blank" rel="nofollow noopener">Start Testing Now</a></div>`;
           addRow('bot', qualify + '<br/>' + cta);
         } else {
-          const msg = `Thanks for checking! At the moment, this program is focused on the United States. We’re expanding soon — check back later for availability in your region.`;
+          const msg = `Bummer! This program is currently for the U.S. only. We're expanding soon, so check back!`;
           addRow('bot', msg);
         }
       }, 900);
@@ -138,19 +195,3 @@
   </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
