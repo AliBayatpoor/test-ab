@@ -85,7 +85,7 @@
       addTyping();
       setTimeout(()=>{
         removeTyping();
-        addRow('bot', `Hey there! 👋 I’m <b>${AGENT}</b> from Testerup. Wanna get paid up to <b>$1,000/week</b> to test cool new games? Let's see if you qualify!`);
+        addRow('bot', `Yo! 👋 I’m <b>${AGENT}</b> from Testerup. Ready to get paid <b>$1,000/week</b> to test fresh new games? Let's quickly see if you qualify!`);
         askAge();
       }, 900);
     }
@@ -93,7 +93,7 @@
       addTyping();
       setTimeout(()=>{
         removeTyping();
-        const ageHtml = `Quick one: What's your age range?
+        const ageHtml = `First up: What's your age range?
           <div class="chips">
             ${['18–24','25–34','35–44','45+'].map(a=>`<button class="chip" data-age="${a}">${a}</button>`).join('')}
           </div>`;
@@ -102,26 +102,26 @@
       }, 700);
     }
     function onAge(val){
-      answers.age = val; addRow('you', val); explainTesterupAndIAP();
+      answers.age = val; addRow('you', val); explainTesterup();
     }
     
-    function explainTesterupAndIAP(){
+    function explainTesterup(){
       addTyping();
       setTimeout(()=>{
         removeTyping();
-        addRow('bot', `Awesome! So, here's the deal: Testerup pays you to play and test games. You download, play, and give feedback.`);
+        addRow('bot', `Alright! Here’s the deal: Testerup connects you with new games and apps to test. You download, play, and share your honest feedback.`);
         addTyping();
         setTimeout(()=>{
           removeTyping();
-          addRow('bot', `For some games, if you make in-app purchases (they're reimbursed!), you can unlock much higher rewards. It's a sweet way to boost your earnings!`);
+          addRow('bot', `We have tasks with various reward levels. The more actively you test and complete higher-reward tasks, the more you can earn. It's about playing and getting rewarded for your time!`);
           addTyping();
           setTimeout(()=>{
             removeTyping();
-            addRow('bot', `Sound like fun?`);
+            addRow('bot', `Sound good?`);
             const optionsHtml = `
               <div class="chips">
-                <button class="chip" data-action="continue">Totally!</button>
-                <button class="chip" data-action="faq">Wait, how does it all work? (FAQ)</button>
+                <button class="chip" data-action="continue">Sounds good!</button>
+                <button class="chip" data-action="faq">How does this actually work? (FAQ)</button>
               </div>`;
             addRow('bot', optionsHtml);
             document.querySelectorAll('[data-action]').forEach(btn=> btn.addEventListener('click', ()=> onAction(btn.dataset.action)));
@@ -131,7 +131,7 @@
     }
 
     function onAction(action){
-      addRow('you', action === 'continue' ? 'Totally!' : 'Wait, how does it all work? (FAQ)');
+      addRow('you', action === 'continue' ? 'Sounds good!' : 'How does this actually work? (FAQ)');
       if(action === 'continue'){
         askUS();
       } else {
@@ -144,16 +144,14 @@
       setTimeout(()=>{
         removeTyping();
         const faqHtml = `
-          <div class="faq-q">Q: How much can I really earn?</div>
-          <div class="faq-a">A: Up to $1,000/week! It depends on how many games you test and if you go for the higher-paying tasks.</div>
-          <div class="faq-q">Q: What about those in-app purchases?</div>
-          <div class="faq-a">A: If a task involves an in-app purchase, it's 100% reimbursed! Plus, those tasks often come with much bigger payouts.</div>
+          <div class="faq-q">Q: How much can I actually earn?</div>
+          <div class="faq-a">A: Your earnings depend on how many games you test and which tasks you complete. We have options ranging from quick tests to more involved, higher-paying ones. Average potential is $1,000/week for dedicated testers.</div>
           <div class="faq-q">Q: How do I get paid?</div>
-          <div class="faq-a">A: PayPal, bank transfer, or gift cards. You choose!</div>
-          <div class="faq-q">Q: Is it really free to join?</div>
-          <div class="faq-a">A: Yep, totally free. No catch, just games and cash.</div>
+          <div class="faq-a">A: You can cash out via PayPal, bank transfer, or gift cards. Your choice!</div>
+          <div class="faq-q">Q: Is it free to join?</div>
+          <div class="faq-a">A: Yep, completely free. No hidden fees, just gaming and earning.</div>
           <div class="chips">
-            <button class="chip" data-action="continue">Got it, let's keep going!</button>
+            <button class="chip" data-action="continue">Got it, let's proceed!</button>
           </div>`;
         addRow('bot', faqHtml);
         document.querySelectorAll('[data-action="continue"]').forEach(btn=> btn.addEventListener('click', ()=> onAction(btn.dataset.action)));
@@ -164,7 +162,7 @@
       addTyping();
       setTimeout(()=>{
         removeTyping();
-        const usHtml = `Almost done! Do you live in the United States?
+        const usHtml = `Almost there! Are you currently in the United States?
           <div class="chips">
             <button class="chip" data-us="yes">Yes</button>
             <button class="chip" data-us="no">No</button>
@@ -182,11 +180,11 @@
         removeTyping();
         const role = 'game tester';
         if(answers.us === 'yes'){
-          const qualify = `You're in! 🎉 Time to become a <b>${role}</b>. Hit the button to download the app and start earning.`;
+          const qualify = `You're in! 🎉 Ready to start as a <b>${role}</b>. Hit the button to grab the app and begin earning.`;
           const cta = `<div class="chips"><a class="chip" href="${AFF}" target="_blank" rel="nofollow noopener">Start Testing Now</a></div>`;
           addRow('bot', qualify + '<br/>' + cta);
         } else {
-          const msg = `Bummer! This program is currently for the U.S. only. We're expanding soon, so check back!`;
+          const msg = `Heads up! This program is currently for U.S. residents only. We're working on expanding, so check back later!`;
           addRow('bot', msg);
         }
       }, 900);
