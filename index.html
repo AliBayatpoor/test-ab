@@ -17,7 +17,7 @@
     body{
       margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Arial;color:var(--text);
       background:radial-gradient(1100px 520px at 50% -220px,#2b2346 0%,transparent 70%),linear-gradient(135deg,var(--bg),var(--bg));
-      overflow:hidden;
+      overflow:auto;
     }
     .glow{position:fixed;border-radius:50%;filter:blur(28px);opacity:.22;pointer-events:none;z-index:0;animation:float 7s ease-in-out infinite}
     .g1{width:140px;height:140px;left:40px;top:100px;background:var(--glow1)}
@@ -25,7 +25,7 @@
     .g3{width:80px;height:80px;left:80px;bottom:120px;background:var(--glow1);animation-delay:2s}
     @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
 
-    main{position:relative;z-index:1;height:100%;display:grid;place-items:center;padding:16px}
+    main{position:relative;z-index:1;display:grid;place-items:center;padding:16px}
     .card{width:min(560px,94vw);height:min(720px,90vh);background:var(--card);border:1px solid var(--card-brd);border-radius:22px;box-shadow:var(--shadow);display:flex;flex-direction:column;overflow:hidden}
 
     .top{display:flex;align-items:center;gap:10px;padding:14px 16px;border-bottom:1px solid rgba(255,255,255,.08);backdrop-filter:blur(6px)}
@@ -44,18 +44,16 @@
     .chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:6px}
     .chip{background:var(--chip);color:#fff;border:1px solid rgba(255,255,255,.1);border-radius:999px;padding:10px 14px;font-weight:800;font-size:13px;cursor:pointer;text-decoration:none;outline:none;appearance:none;-webkit-appearance:none}
 
-    .protip{
-      margin:12px 16px 16px;
-      padding:14px 16px;
-      background:rgba(219,30,20,0.15);
-      border:1px solid var(--accent);
-      border-radius:12px;
-      font-size:14px;
-      line-height:1.5;
-      font-weight:600;
-      text-align:center;
-      color:#fff;
-    }
+    /* FAQ Section */
+    .faq{margin-top:16px;width:min(560px,94vw);background:var(--card);border:1px solid var(--card-brd);border-radius:16px;box-shadow:var(--shadow);overflow:hidden}
+    .faq h3{margin:0;padding:16px;font-size:17px;font-weight:800;border-bottom:1px solid rgba(255,255,255,.08);text-align:center}
+    .faq-item{border-bottom:1px solid rgba(255,255,255,.08)}
+    .faq-q{width:100%;padding:16px;background:none;border:none;color:#fff;text-align:left;font-size:15px;font-weight:600;cursor:pointer;display:flex;justify-content:space-between;align-items:center}
+    .faq-a{display:none;padding:0 16px 16px 16px;font-size:14px;line-height:1.6;color:var(--muted)}
+    .faq-q svg{transition:transform .3s ease;flex-shrink:0}
+    .faq-q.active svg{transform:rotate(90deg)}
+
+    .faq-protip{background:rgba(219,30,20,0.12);border-top:2px solid var(--accent);padding:14px 16px;font-size:14px;line-height:1.5;font-weight:600;color:#fff;text-align:center}
 
     /* Typing bubble */
     .typing{width:42px;height:18px;border-radius:12px;background:var(--bot);display:flex;align-items:center;justify-content:center;gap:3px;padding:0 6px}
@@ -64,7 +62,7 @@
     .dot:nth-child(3){animation-delay:.4s}
     @keyframes blink{0%,80%,100%{opacity:.2}40%{opacity:1}}
 
-    @media(max-width:420px){.bubble{max-width:90%}.card{height:90vh}.protip{padding:12px;font-size:13px}}
+    @media(max-width:420px){.bubble{max-width:90%}.card{height:90vh}.faq h3{font-size:16px}.faq-q{font-size:14px}.faq-a{font-size:13px}}
   </style>
 </head>
 <body>
@@ -81,7 +79,31 @@
         </div>
       </div>
       <div class="chat" id="chat"></div>
-      <div class="protip">💡 <b>Pro Tip:</b> In‑app purchases unlock the biggest rewards — fully reimbursed when stated in the task.</div>
+    </div>
+
+    <div class="faq">
+      <h3>FAQ</h3>
+      <div class="faq-protip">💡 <b>Pro Tip:</b> In-app purchases unlock the biggest rewards — fully reimbursed when stated in the task.</div>
+      <div class="faq-item">
+        <button class="faq-q">What is Testerup? <svg width="10" height="10" viewBox="0 0 10 10"><path d="M2 1 L8 5 L2 9 Z" fill="#fff"/></svg></button>
+        <div class="faq-a">Testerup is a platform where you can test apps and games, complete tasks, and earn real money for your time.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">How do I earn? <svg width="10" height="10" viewBox="0 0 10 10"><path d="M2 1 L8 5 L2 9 Z" fill="#fff"/></svg></button>
+        <div class="faq-a">Simply choose a game or app from the offer wall, follow the listed tasks, and earn money as you progress. Some tasks may involve in-app purchases, which are reimbursed when noted.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">When can I cash out? <svg width="10" height="10" viewBox="0 0 10 10"><path d="M2 1 L8 5 L2 9 Z" fill="#fff"/></svg></button>
+        <div class="faq-a">You can cash out anytime via Bank or PayPal once your balance is credited.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">Why don’t I see certain games? <svg width="10" height="10" viewBox="0 0 10 10"><path d="M2 1 L8 5 L2 9 Z" fill="#fff"/></svg></button>
+        <div class="faq-a">The offer wall updates daily. A game like Clash Royale may not appear right now, but new offers rotate in constantly.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">How is progress tracked? <svg width="10" height="10" viewBox="0 0 10 10"><path d="M2 1 L8 5 L2 9 Z" fill="#fff"/></svg></button>
+        <div class="faq-a">Your progress is tracked automatically in the app. Just follow the listed requirements for each task.</div>
+      </div>
     </div>
   </main>
 
@@ -138,7 +160,7 @@
 
     function askUS(){
       typeAndSend(`Do you live in the United States?`, ()=>{
-        const usHtml = `<div class="chips"><button class="chip" data-us="yes">Yes</button><button class="chip" data-us="no">No</button></div>`;
+        const usHtml = `<div class="chips"><button class="chip" data-us="Yes">Yes</button><button class="chip" data-us="No">No</button></div>`;
         addRow('bot', usHtml);
         attachUSListeners();
       });
@@ -151,7 +173,7 @@
     function onUS(val){ addRow('you', val); answers.us=val; setTimeout(finish, 400); }
 
     function finish(){
-      if(answers.us !== 'yes'){
+      if(answers.us !== 'Yes'){
         return typeAndSend(`Thanks for your interest! Right now these offers are mainly for US users. We’ll notify you when it’s live in your region.`);
       }
       typeAndSend(`You qualify! Sign up below to start testing games and earn up to $1k/week.`, ()=>{
@@ -164,6 +186,15 @@
     }
 
     start();
+
+    // FAQ toggle
+    document.querySelectorAll('.faq-q').forEach(q=>{
+      q.addEventListener('click',()=>{
+        q.classList.toggle('active');
+        const a = q.nextElementSibling;
+        a.style.display = a.style.display==='block' ? 'none' : 'block';
+      });
+    });
   </script>
 </body>
 </html>
