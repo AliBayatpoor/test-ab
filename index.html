@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <title>Rewards Chat — $1000 Weekly Potential</title>
-  <meta name="description" content="Conversational flow explaining app tasks clearly with natural pacing." />
+  <title>Rewards Chat — $1k Weekly Potential</title>
+  <meta name="description" content="Concise qualification chat with quick facts strip." />
   <style>
     :root{
       --bg:#221C36; --glow1:#DB1E14; --glow2:#a5150c; --text:#ffffff; --muted:rgba(255,255,255,.72);
@@ -12,34 +12,59 @@
       --bot:#2a2542; --you:#3a3458; --chip:#2d274a; --online:#21d07a; --shadow:0 18px 60px rgba(0,0,0,.45);
       --accent:#DB1E14;
     }
-    *{box-sizing:border-box} html,body{height:100%}
-    body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Arial;color:var(--text);
-      background:radial-gradient(1100px 520px at 50% -220px, #2b2346 0%, transparent 70%),linear-gradient(135deg,var(--bg),var(--bg)); overflow:hidden}
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Arial;color:var(--text);
+      background:radial-gradient(1100px 520px at 50% -220px,#2b2346 0%,transparent 70%),linear-gradient(135deg,var(--bg),var(--bg));
+      overflow:hidden;
+    }
     .glow{position:fixed;border-radius:50%;filter:blur(28px);opacity:.22;pointer-events:none;z-index:0;animation:float 7s ease-in-out infinite}
     .g1{width:140px;height:140px;left:40px;top:100px;background:var(--glow1)}
     .g2{width:100px;height:100px;right:60px;top:160px;background:var(--glow2);animation-delay:1.2s;opacity:.18}
     .g3{width:80px;height:80px;left:80px;bottom:120px;background:var(--glow1);animation-delay:2s}
     @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+
     main{position:relative;z-index:1;height:100%;display:grid;place-items:center;padding:16px}
-    .card{width:min(560px,94vw);height:min(760px,94vh);background:var(--card);border:1px solid var(--card-brd);border-radius:22px;box-shadow:var(--shadow);display:flex;flex-direction:column;overflow:hidden}
-    .top{display:flex;align-items:center;gap:12px;padding:14px 16px;border-bottom:1px solid rgba(255,255,255,.08);backdrop-filter:blur(6px)}
-    .logo{width:36px;height:36px;border-radius:10px;overflow:hidden;background:rgba(255,255,255,.06);display:grid;place-items:center;position:relative}
-    .logo img{width:100%;height:100%;object-fit:cover}
-    .status{position:absolute;bottom:2px;right:2px;width:10px;height:10px;border-radius:50%;background:var(--online);border:2px solid #221C36}
-    .title{font-weight:900;letter-spacing:.2px}
-    .title small{display:block;color:var(--muted);font-weight:600}
-    .chat{flex:1;overflow:auto;padding:16px;display:flex;flex-direction:column;gap:10px;scroll-behavior:smooth}
+    .card{width:min(560px,94vw);height:min(720px,90vh);background:var(--card);border:1px solid var(--card-brd);border-radius:22px;box-shadow:var(--shadow);display:flex;flex-direction:column;overflow:hidden}
+
+    .top{display:flex;align-items:center;gap:10px;padding:14px 16px;border-bottom:1px solid rgba(255,255,255,.08);backdrop-filter:blur(6px)}
+    .logo{width:34px;height:34px;border-radius:10px;overflow:hidden;display:flex;align-items:center;justify-content:center;background:#fff;padding:4px}
+    .logo img{width:100%;height:100%;object-fit:contain}
+    .agent-info{display:flex;flex-direction:column;line-height:1.3}
+    .agent-name{font-weight:700;font-size:15px;color:#fff}
+    .agent-status{font-size:13px;color:var(--muted);display:flex;align-items:center;gap:5px}
+    .status-dot{width:8px;height:8px;border-radius:50%;background:var(--online)}
+
+    .chat{flex:1;overflow:auto;padding:16px;display:flex;flex-direction:column;gap:10px}
     .row{display:flex;gap:10px}.row.you{justify-content:flex-end}
     .bubble{max-width:82%;padding:10px 12px;border-radius:14px;line-height:1.45;font-size:14px}
     .you .bubble{background:var(--you)} .bot .bubble{background:var(--bot)}
+
     .chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:6px}
-    .chip{background:var(--chip);color:#fff;border:1px solid rgba(255,255,255,.1);border-radius:999px;padding:10px 14px;font-weight:800;font-size:13px;cursor:pointer;text-decoration:none}
-    .faq{padding:12px 16px;border-top:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.03)}
-    details{margin:8px 0}
-    summary{cursor:pointer;font-weight:800}
-    summary::marker{color:var(--accent)}
-    .note{font-size:11.5px;color:rgba(255,255,255,.65)}
-    @media (max-width:420px){.bubble{max-width:90%}.card{height:96vh}}
+    .chip{background:var(--chip);color:#fff;border:1px solid rgba(255,255,255,.1);border-radius:999px;padding:10px 14px;font-weight:800;font-size:13px;cursor:pointer;text-decoration:none;outline:none;appearance:none;-webkit-appearance:none}
+
+    .protip{
+      margin:12px 16px 16px;
+      padding:14px 16px;
+      background:rgba(219,30,20,0.15);
+      border:1px solid var(--accent);
+      border-radius:12px;
+      font-size:14px;
+      line-height:1.5;
+      font-weight:600;
+      text-align:center;
+      color:#fff;
+    }
+
+    /* Typing bubble */
+    .typing{width:42px;height:18px;border-radius:12px;background:var(--bot);display:flex;align-items:center;justify-content:center;gap:3px;padding:0 6px}
+    .dot{width:6px;height:6px;background:#fff;border-radius:50%;animation:blink 1.4s infinite both}
+    .dot:nth-child(2){animation-delay:.2s}
+    .dot:nth-child(3){animation-delay:.4s}
+    @keyframes blink{0%,80%,100%{opacity:.2}40%{opacity:1}}
+
+    @media(max-width:420px){.bubble{max-width:90%}.card{height:90vh}.protip{padding:12px;font-size:13px}}
   </style>
 </head>
 <body>
@@ -48,36 +73,15 @@
     <div class="card" role="dialog" aria-label="Qualification Chat">
       <div class="top">
         <div class="logo">
-          <img src="https://cdn.testerup.com/themes/default/img/favicon/android-icon-192x192.png" alt="Assistant"/>
-          <div class="status" title="online"></div>
+          <img src="https://cdn.testerup.com/themes/default/img/favicon/android-icon-192x192.png" alt="Testerup"/>
         </div>
-        <div class="title" id="agentName">Rewards Chat Assistant<small>Online now</small></div>
+        <div class="agent-info">
+          <span class="agent-name" id="agentName"></span>
+          <span class="agent-status"><div class="status-dot"></div>Online now</span>
+        </div>
       </div>
       <div class="chat" id="chat"></div>
-
-      <!-- Q&A section for clarity and higher-quality traffic -->
-      <section class="faq" id="faq">
-        <details>
-          <summary>What is Testerup?</summary>
-          <div class="note">A rewards platform that connects you with advertisers. You earn by completing clearly defined app/game tasks (e.g., reach level X, keep the app for Y days). You always see the requirement and payout before starting.</div>
-        </details>
-        <details>
-          <summary>How do earnings work?</summary>
-          <div class="note">Each task pays a fixed amount. Doing more tasks = more earnings. Consistent users who pick higher‑payout tasks can approach around <b>$1,000/week</b>, depending on time and offer availability.</div>
-        </details>
-        <details>
-          <summary>When do I get paid?</summary>
-          <div class="note">Most tasks confirm within 24–72 hours after the requirement is met. You can cash out once you reach the in‑app minimum. Bank and PayPal are supported where available.</div>
-        </details>
-        <details>
-          <summary>Is this free?</summary>
-          <div class="note">Yes to join. Some offers may include optional in‑app purchases, but they’re not required unless stated in the task description.</div>
-        </details>
-        <details>
-          <summary>Why didn’t a task credit?</summary>
-          <div class="note">Use a real device (no VPN/emulators), follow steps exactly, allow tracking/attribution if prompted, avoid duplicate accounts, and keep the app for the required time. If something looks off, check the task’s help/appeal steps.</div>
-        </details>
-      </section>
+      <div class="protip">💡 <b>Pro Tip:</b> In‑app purchases unlock the biggest rewards — fully reimbursed when stated in the task.</div>
     </div>
   </main>
 
@@ -86,8 +90,8 @@
     const NAMES = ['Emma','Olivia','Ava','Isabella','Sophia','Mia','Amelia','Harper','Evelyn','Abigail'];
     const AGENT = NAMES[Math.floor(Math.random()*NAMES.length)];
     const chat = document.getElementById('chat');
-    const agentTitle = document.getElementById('agentName');
-    agentTitle.innerHTML = `${AGENT} <small>Online now</small>`;
+
+    document.getElementById('agentName').textContent = AGENT;
 
     function addRow(side, html){
       const row = document.createElement('div');
@@ -96,47 +100,70 @@
       chat.appendChild(row); chat.scrollTop = chat.scrollHeight;
     }
 
+    function showTyping(nextFn, delay=800){
+      const existing = document.querySelector('.typing-row');
+      if(existing) existing.remove();
+      const row = document.createElement('div');
+      row.className = 'row bot typing-row';
+      const bubble = document.createElement('div');
+      bubble.className = 'bubble typing';
+      bubble.innerHTML = '<div class="dot"></div><div class="dot"></div><div class="dot"></div>';
+      row.appendChild(bubble);
+      chat.appendChild(row); chat.scrollTop = chat.scrollHeight;
+      setTimeout(()=>{ row.remove(); nextFn(); }, delay);
+    }
+
+    function typeAndSend(html, cb){ showTyping(()=>{ addRow('bot', html); if(cb) cb(); }, 700); }
+
     function start(){
-      addRow('bot', `Hi 👋 I’m <b>${AGENT}</b>. This is super simple — you test apps & games, complete easy tasks, and earn real cash (people see up to <b>$1000/week</b>).`);
-      addRow('bot', "Let’s check if you qualify real quick.");
-      askAge();
+      typeAndSend(`Hi 👋 I’m <b>${AGENT}</b>. This is super simple — you test apps & games, complete easy tasks, and earn real cash (people see up to <b>$1,000/week</b>).`, ()=>{
+        typeAndSend(`Let’s check if you qualify real quick.`, askAge);
+      });
     }
 
     function askAge(){
-      addRow('bot', `How old are you?`);
-      const ageHtml = `<div class="chips">${['18–24','25–34','35–44','45+'].map(a=>`<button class=\"chip\" data-age=\"${a}\">${a}</button>`).join('')}</div>`;
-      addRow('bot', ageHtml);
+      typeAndSend(`How old are you?`, ()=>{
+        const ageHtml = `<div class="chips">${['18–24','25–34','35–44','45+'].map(a=>`<button class="chip" data-age="${a}">${a}</button>`).join('')}</div>`;
+        addRow('bot', ageHtml);
+        attachAgeListeners();
+      });
+    }
+
+    function attachAgeListeners(){
       document.querySelectorAll('[data-age]').forEach(btn=> btn.addEventListener('click', ()=> onAge(btn.dataset.age)));
     }
 
     let answers={};
-    function onAge(val){ answers.age=val; addRow('you', val); askUS(); }
+    function onAge(val){ addRow('you', val); answers.age=val; setTimeout(askUS, 400); }
 
     function askUS(){
-      addRow('bot', "Nice. Do you live in the United States?");
-      const usHtml = `<div class=\"chips\"><button class=\"chip\" data-us=\"yes\">Yes</button><button class=\"chip\" data-us=\"no\">No</button></div>`;
-      addRow('bot', usHtml);
+      typeAndSend(`Do you live in the United States?`, ()=>{
+        const usHtml = `<div class="chips"><button class="chip" data-us="yes">Yes</button><button class="chip" data-us="no">No</button></div>`;
+        addRow('bot', usHtml);
+        attachUSListeners();
+      });
+    }
+
+    function attachUSListeners(){
       document.querySelectorAll('[data-us]').forEach(btn=> btn.addEventListener('click', ()=> onUS(btn.dataset.us)));
     }
 
-    function onUS(val){ answers.us=val; addRow('you', val); finish(); }
+    function onUS(val){ addRow('you', val); answers.us=val; setTimeout(finish, 400); }
 
     function finish(){
       if(answers.us !== 'yes'){
-        addRow('bot', "Thanks for your interest! At the moment, these offers are mainly for US users. We’ll notify you when it’s available in your area.");
-        return;
+        return typeAndSend(`Thanks for your interest! Right now these offers are mainly for US users. We’ll notify you when it’s live in your region.`);
       }
-      // Qualified path: explain briefly in multiple bubbles (no hype, clearer expectations)
-      addRow('bot', "Perfect, you qualify! 🎉");
-      addRow('bot', "Quick rundown: you’ll see a list of apps & games with clear tasks (e.g., reach a level or keep an app for a few days).");
-      addRow('bot', "Each task shows its requirements and reward upfront. The more tasks you complete, the more you earn — consistent users can approach around <b>$1,000/week</b>.");
-      addRow('bot', "Most payouts confirm in 24–72 hours after you complete a task. Once you hit the in‑app minimum, you can withdraw to Bank or PayPal.");
-      const cta = `<div class=\"chips\"><a class=\"chip\" href=\"${AFF}\" target=\"_blank\" rel=\"nofollow noopener\">Start Here</a></div>`;
-      addRow('bot', cta);
+      typeAndSend(`You qualify! Sign up below to start testing games and earn up to $1k/week.`, ()=>{
+        typeAndSend(`Play your favourite games — the more you play, the more you earn. (Level up faster with in-app purchases that are 100% reimbursed.)`, ()=>{
+          typeAndSend(`Cash out anytime — Bank/PayPal.`, ()=>{
+            addRow('bot', `<div class="chips"><a class="chip" href="${AFF}" target="_blank" rel="nofollow noopener">Start Here</a></div>`);
+          });
+        });
+      });
     }
 
     start();
   </script>
 </body>
 </html>
-
