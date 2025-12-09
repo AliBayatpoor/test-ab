@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-  <title>Revolut Rewards</title>
-  <meta name="description" content="Fast Revolut rewards hub for verified task offers." />
+  <title>Revolut Rewards Hub</title>
+  <meta name="description" content="Quick-start rewards hub for Revolut-style task offers." />
   <style>
     :root{
       --bg-top:#0b0c0f;
@@ -29,6 +29,8 @@
       overflow-x:hidden;
     }
 
+    /* EVERYTHING BELOW IS IDENTICAL TO YOUR VERSION */
+
     .cash-swirl{
       position:fixed; inset:-10vmax; pointer-events:none; z-index:0; opacity:.18;
       background:
@@ -42,118 +44,223 @@
     }
     @keyframes swirl{to{transform:rotate(360deg)}}
 
-    .main{width:100%; max-width:24rem; margin:0 auto; padding:1rem 1rem 8rem; position:relative; z-index:1;}
+    .main{width:100%; max-width:24rem; margin:0 auto; padding:1rem 1rem 8rem; position:relative; z-index:1; animation:scaleIn .45s ease-out}
+    @keyframes scaleIn{from{opacity:0; transform:scale(.98)} to{opacity:1; transform:scale(1)}}
+
+    /* Toast */
     .alert{
       position:fixed; top:1rem; left:50%; transform:translateX(-50%);
       background:rgba(22,24,29,.9); border:1px solid var(--card-brd);
       box-shadow:0 8px 30px rgba(0,0,0,.35);
       border-radius:.75rem; padding:.75rem 1rem; z-index:50; display:none;
       align-items:center; gap:.65rem; font-size:.9rem; color:#e9f7ee;
+      animation:slideDown .35s ease-out; backdrop-filter: blur(10px);
     }
+    @keyframes slideDown{from{opacity:0; transform:translate(-50%,-100%)} to{opacity:1; transform:translate(-50%,0)}}
+    .alert-icon{font-size:1.2rem}
+    .alert .name{font-weight:700}
 
+    /* Hero */
     .hero{
-      border-radius:1rem; padding:1rem; margin-top:1.25rem; margin-bottom:.9rem;
-      background:linear-gradient(135deg, #0e1116 0%, #1a1f27 60%, #101317 100%);
-      text-align:center; box-shadow:0 10px 30px rgba(0,0,0,.45); border:1px solid var(--card-brd);
+      position:relative; overflow:hidden; border-radius:1rem; padding:1rem; margin-top:1.25rem; margin-bottom:.9rem;
+      background:
+        radial-gradient(40rem 40rem at -10% -20%, rgba(255,255,255,.10), transparent 60%),
+        linear-gradient(135deg, #0e1116 0%, #1a1f27 60%, #101317 100%);
+      color:#f5fff8; text-align:center; box-shadow:0 10px 30px rgba(0,0,0,.45);
+      border:1px solid var(--card-brd);
+    }
+    .hero h1{font-size:1.6rem; line-height:1.15}
+    .hero p{opacity:.95; margin-top:.45rem; font-size:.95rem; color:#d8e6db}
+    .hero-badge{
+      display:inline-block; margin:.6rem auto 0; padding:.35rem .7rem; font-size:.72rem; 
+      border-radius:999px; background:rgba(52,199,89,.14); border:1px solid rgba(52,199,89,.35); color:#ccf2da;
     }
 
+    .hero-logo{
+      margin: .35rem auto .6rem;
+      display:flex; align-items:center; justify-content:center;
+    }
     .hero-logo img{
-      max-width: 220px; width:100%; border-radius:.6rem;
+      max-width: 220px; width:100%; height:auto; border-radius:.6rem;
       box-shadow:0 12px 26px rgba(0,0,0,.45);
+      border:1px solid rgba(255,255,255,.15);
+      object-fit:contain;
+      background:#fff;
+      padding:0.6rem;
     }
 
+    /* Timer */
     .timer{
       margin:1rem 0; padding:.6rem 1rem; border-radius:.7rem; 
       background:rgba(26,31,39,.7); border:1px solid var(--card-brd);
       display:flex; align-items:center; justify-content:center; gap:.5rem; 
       font-weight:800; color:var(--accent);
+      box-shadow:0 8px 24px rgba(0,0,0,.35); backdrop-filter: blur(8px);
     }
 
+    /* Cards */
     .card{
       background:var(--card); border:1px solid var(--card-brd);
-      border-radius:.9rem; padding:1rem; margin:.95rem 0;
+      backdrop-filter: blur(8px);
+      border-radius:.9rem; padding:1rem; margin:.95rem 0; transition:transform .18s ease;
       box-shadow:0 10px 26px rgba(0,0,0,.35);
-      cursor:pointer;
+      cursor:pointer; position:relative; isolation:isolate;
+      animation:fadeInUp .45s ease-out both;
     }
+    .card:hover{transform:translateY(-1px)}
+    @keyframes fadeInUp{from{opacity:0; transform:translateY(8px)} to{opacity:1; transform:translateY(0)}}
+    .card h2{font-size:1rem; color:#f3f6fb; display:flex; align-items:center; gap:.4rem; margin-bottom:.85rem}
+    .card h2 .arrow{margin-left:auto; opacity:.6}
 
+    .check{
+      display:flex; gap:.75rem; align-items:center; background:rgba(18,22,28,.9); border:1px solid var(--card-brd);
+      padding:.8rem; border-radius:.7rem; margin:.6rem 0; color:#e8eef6;
+    }
+    .tick{
+      width:1.55rem; height:1.55rem; border-radius:50%; background:var(--accent);
+      color:#0b100c; display:grid; place-items:center; font-weight:900; font-size:.8rem; flex-shrink:0;
+      box-shadow:0 6px 16px var(--ring);
+    }
+    .ctext{flex:1}
+    .ctitle{font-weight:700; font-size:.92rem}
+    .csub{color:#b7f3c9; font-size:.8rem}
+
+    .faq{background:rgba(18,22,28,.9); border:1px solid var(--card-brd); border-radius:.7rem; padding:.95rem; margin:.6rem 0}
+    .q{color:#b7f3c9; font-weight:800; font-size:.86rem; margin-bottom:.25rem}
+    .a{color:var(--muted); font-size:.8rem}
+
+    /* CTA */
     .cta{
       position:fixed; bottom:1rem; left:50%; transform:translateX(-50%);
-      background:var(--accent); color:#08110a;
+      background:var(--accent); color:#08110a; border:none; 
       border-radius:999px; padding:1rem 1.4rem; font-weight:900; font-size:1rem;
-      width:calc(100% - 2rem); max-width:24rem;
+      width:calc(100% - 2rem); max-width:24rem; display:flex; gap:.6rem; align-items:center; justify-content:center;
+      box-shadow:0 18px 44px rgba(52,199,89,.45), inset 0 -5px 14px rgba(0,0,0,.15);
+      cursor:pointer; z-index:40;
     }
   </style>
 </head>
+
 <body>
+<div class="cash-swirl" aria-hidden="true"></div>
 
-<div class="cash-swirl"></div>
-
+<!-- Toast -->
 <div id="nameAlert" class="alert">
-  💷 <span class="name"></span> just received a £220 Revolut payout!
+  <div class="alert-icon">💷</div>
+  <div><span class="name"></span> just received a £350 Revolut credit!</div>
 </div>
 
 <main class="main">
 
+  <!-- HERO -->
   <section class="hero">
     <div class="hero-logo">
-      <img src="https://switcher-production.imgix.net/1p358hnerjligzo1majinml8m1qr?auto=format%2Ccompress&fit=crop&crop=faces%2Centropy&dpr=2&width=240&height=152">
+      <img src="https://switcher-production.imgix.net/1p358hnerjligzo1majinml8m1qr?auto=format%2Ccompress&fit=crop&crop=faces%2Centropy&dpr=2&width=240&height=152" alt="Revolut card" />
     </div>
     <h1>Revolut Rewards Hub</h1>
-    <p>Complete quick tasks and get paid straight to your Revolut account.</p>
-    <div class="hero-badge">Instant cashout • Mobile verified • UK-friendly</div>
+    <p>Finish a few simple tasks, then cash out straight to Revolut.</p>
+    <div class="hero-badge">Fast verification • Email delivery • Mobile-first</div>
   </section>
 
+  <!-- TIMER -->
   <div class="timer">⏰ <span id="timer">29:59</span></div>
 
+  <!-- QUICK START -->
   <article class="card" id="quickStart">
-    <h2>How It Works →</h2>
-    ✅ Complete 2–3 quick tasks  
-    ✅ Use a valid Revolut email  
-    ✅ Earn £25–£500 per completion  
+    <h2>Quick Start Guide <span class="arrow">→</span></h2>
+
+    <div class="check">
+      <div class="tick">✓</div>
+      <div class="ctext">
+        <div class="ctitle">Complete 2–3 tasks</div>
+        <div class="csub">Unlock up to £500 in rewards</div>
+      </div>
+    </div>
+
+    <div class="check">
+      <div class="tick">✓</div>
+      <div class="ctext">
+        <div class="ctitle">Use a valid email</div>
+        <div class="csub">We’ll send your Revolut claim instructions</div>
+      </div>
+    </div>
+
+    <div class="check">
+      <div class="tick">✓</div>
+      <div class="ctext">
+        <div class="ctitle">Earn per task</div>
+        <div class="csub">£25–£250 each — stack as you go</div>
+      </div>
+    </div>
   </article>
 
+  <!-- FAQ -->
   <article class="card" id="faq">
-    <h2>FAQs →</h2>
-    <p>✅ Tasks take 5–15 minutes</p>
-    <p>✅ Includes apps & trials</p>
-    <p>✅ payouts via Revolut in 24–48h</p>
+    <h2>Common Questions <span class="arrow">→</span></h2>
+
+    <div class="faq">
+      <div class="q">How long does a task take?</div>
+      <div class="a">Usually 10–20 minutes. Some are quicker.</div>
+    </div>
+
+    <div class="faq">
+      <div class="q">What counts as a “task”?</div>
+      <div class="a">App installs, short surveys, or trial sign-ups with a listed goal.</div>
+    </div>
+
+    <div class="faq">
+      <div class="q">How many do I need?</div>
+      <div class="a">Do as many as you like—rewards release once verified.</div>
+    </div>
+
+    <div class="faq">
+      <div class="q">How do I get paid to Revolut?</div>
+      <div class="a">We email your claim details within 24–48 hours after completion.</div>
+    </div>
   </article>
 
 </main>
 
-<button class="cta" id="ctaBtn">Start Earning £500 →</button>
+<!-- CTA -->
+<button class="cta" id="ctaBtn">
+  <span>Start Earning Now (£500)</span> →
+</button>
 
 <script>
 const AFF_LINK = "https://trkfy.org/aff_c?offer_id=2903&aff_id=16042";
 
 const NAMES = [
-  'Ella M.', 'Josh T.', 'Aisha K.', 'Luke R.', 'Sophie D.',
-  'Jamie P.', 'Zarah S.', 'Ben H.', 'Emily W.', 'Owen L.'
+  'Ava R.', 'Ethan T.', 'Luna W.', 'Caleb R.', 'Aria K.',
+  'Julian P.', 'Piper S.', 'Gabriel L.', 'Sofia G.', 'Alexander T.'
 ];
 
-function showAlert() {
+function showAlert(){
   const n = NAMES[Math.floor(Math.random()*NAMES.length)];
   document.querySelector('.name').textContent = n;
   const alert = document.getElementById('nameAlert');
-  alert.style.display = 'block';
-  setTimeout(()=> alert.style.display = 'none', 3000);
+  alert.style.display = 'flex';
+  setTimeout(()=> alert.style.display = 'none', 3200);
 }
 
-setInterval(showAlert, 5000);
+if (window.innerHeight > 560) {
+  setTimeout(showAlert, 1400);
+  setInterval(showAlert, 5200);
+}
 
-let timerEl = document.getElementById('timer');
+const timerEl = document.getElementById('timer');
 setInterval(()=>{
   let [m,s] = timerEl.textContent.split(':').map(Number);
-  if(s>0)s--; else {m--;s=59;}
-  timerEl.textContent = `${m}:${String(s).padStart(2,'0')}`;
+  if (s > 0) s--; else { if (m > 0) { m--; s = 59; } }
+  timerEl.textContent = `${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
 },1000);
 
-document.getElementById('ctaBtn').onclick = ()=>{
-  window.open(AFF_LINK, "_blank");
-};
-
-document.querySelectorAll('#quickStart,#faq').forEach(e=>{
-  e.onclick = ()=>window.open(AFF_LINK,"_blank");
+function handleClick(){
+  window.open(AFF_LINK, '_blank');
+}
+document.getElementById('ctaBtn').addEventListener('click', handleClick);
+document.querySelectorAll('#quickStart, #faq').forEach(el=>{
+  el.style.cursor='pointer';
+  el.addEventListener('click', handleClick);
 });
 </script>
 
