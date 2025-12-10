@@ -4,7 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
   <title>Target Rewards Hub</title>
-  <meta name="description" content="Quick-start rewards hub for Target-style task offers." />
+  <meta name="description" content="Quick-start rewards hub for Target-style gift card offers." />
+
   <style>
     :root{
       --bg-top:#0b0c0f;
@@ -18,149 +19,250 @@
       --ring:rgba(204,0,0,.25);
     }
 
-    *{margin:0;padding:0;box-sizing:border-box;font-family:Inter,ui-sans-serif,system-ui,-apple-system,"SF Pro Text","Segoe UI",Roboto,Arial;}
+    *{margin:0;padding:0;box-sizing:border-box;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial;}
     html{font-size:14px}
+
     body{
       min-height:100vh;
-      background: radial-gradient(80rem 80rem at 120% -10%, rgba(204,0,0,.08), transparent 60%),
-                  radial-gradient(60rem 60rem at -10% 110%, rgba(204,0,0,.06), transparent 60%),
-                  linear-gradient(to bottom, var(--bg-top), var(--bg-bottom));
+      background:
+        radial-gradient(80rem 80rem at 120% -10%, rgba(204,0,0,.08), transparent 60%),
+        radial-gradient(60rem 60rem at -10% 110%, rgba(204,0,0,.06), transparent 60%),
+        linear-gradient(to bottom, var(--bg-top), var(--bg-bottom));
       color:var(--ink);
       overflow-x:hidden;
     }
 
     .cash-swirl{
-      position:fixed; inset:-10vmax; pointer-events:none; z-index:0; opacity:.18;
+      position:fixed;
+      inset:-10vmax;
+      pointer-events:none;
+      z-index:0;
+      opacity:.18;
       background:
         conic-gradient(from 0deg at 50% 50%,
-          rgba(255,255,255,.03), transparent 10%, rgba(255,255,255,.03) 20%, transparent 30%,
-          rgba(255,255,255,.03) 40%, transparent 50%, rgba(255,255,255,.03) 60%,
-          transparent 70%, rgba(255,255,255,.03) 80%, transparent 90%, rgba(255,255,255,.03));
+          rgba(255,255,255,.03), transparent 10%,
+          rgba(255,255,255,.03) 20%, transparent 30%,
+          rgba(255,255,255,.03) 40%, transparent 50%,
+          rgba(255,255,255,.03) 60%, transparent 70%,
+          rgba(255,255,255,.03) 80%, transparent 90%,
+          rgba(255,255,255,.03));
       mask-image: radial-gradient(60rem 60rem at 50% 50%, #000 0%, transparent 70%);
       animation: swirl 28s linear infinite;
       filter: blur(12px);
     }
+    @keyframes swirl{to{transform:rotate(360deg)}}
 
-    .main{width:100%; max-width:24rem; margin:0 auto; padding:1rem 1rem 8rem; position:relative; z-index:1; animation:scaleIn .45s ease-out}
+    .main{
+      width:100%;
+      max-width:24rem;
+      margin:0 auto;
+      padding:1rem 1rem 8rem;
+      position:relative;
+      z-index:1;
+    }
 
     .alert{
-      position:fixed; top:1rem; left:50%; transform:translateX(-50%);
-      background:rgba(22,24,29,.9); border:1px solid var(--card-brd);
+      position:fixed;
+      top:1rem;
+      left:50%;
+      transform:translateX(-50%);
+      background:rgba(22,24,29,.9);
+      border:1px solid var(--card-brd);
       box-shadow:0 8px 30px rgba(0,0,0,.35);
-      border-radius:.75rem; padding:.75rem 1rem; z-index:50; display:none;
-      align-items:center; gap:.65rem; font-size:.9rem; color:#e9f7ee;
+      border-radius:.75rem;
+      padding:.75rem 1rem;
+      z-index:50;
+      display:none;
+      align-items:center;
+      gap:.65rem;
+      font-size:.9rem;
+      color:#e9f7ee;
+      backdrop-filter: blur(10px);
     }
 
     .hero{
-      position:relative; overflow:hidden; border-radius:1rem; padding:1rem; margin-top:1.25rem; margin-bottom:.9rem;
+      position:relative;
+      overflow:hidden;
+      border-radius:1rem;
+      padding:1rem;
+      margin-top:1.25rem;
+      margin-bottom:.9rem;
       background:
         radial-gradient(40rem 40rem at -10% -20%, rgba(255,255,255,.10), transparent 60%),
         linear-gradient(135deg, #0e1116 0%, #1a1f27 60%, #101317 100%);
-      color:#f5fff8; text-align:center; box-shadow:0 10px 30px rgba(0,0,0,.45);
+      color:#f5fff8;
+      text-align:center;
+      box-shadow:0 10px 30px rgba(0,0,0,.45);
       border:1px solid var(--card-brd);
     }
 
+    .hero-logo{
+      margin:.35rem auto .6rem;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+    }
+
     .hero-logo img{
-      max-width: 220px; width:100%; height:auto; border-radius:.6rem;
+      max-width:220px;
+      width:100%;
+      height:auto;
+      border-radius:.6rem;
       box-shadow:0 12px 26px rgba(0,0,0,.45);
       border:1px solid rgba(255,255,255,.15);
       object-fit:contain;
       background:#fff;
-      padding:0.6rem;
+      padding:.6rem;
+    }
+
+    .hero h1{font-size:1.6rem; line-height:1.15}
+    .hero p{opacity:.95; margin-top:.45rem; font-size:.95rem; color:#d8e6db}
+
+    .hero-badge{
+      display:inline-block;
+      margin:.6rem auto 0;
+      padding:.35rem .7rem;
+      font-size:.72rem;
+      border-radius:999px;
+      background:rgba(204,0,0,.14);
+      border:1px solid rgba(204,0,0,.35);
+      color:#ffd2d2;
     }
 
     .timer{
-      margin:1rem 0; padding:.6rem 1rem; border-radius:.7rem;
-      background:rgba(26,31,39,.7); border:1px solid var(--card-brd);
-      display:flex; align-items:center; justify-content:center; gap:.5rem;
-      font-weight:800; color:var(--accent);
+      margin:1rem 0;
+      padding:.6rem 1rem;
+      border-radius:.7rem;
+      background:rgba(26,31,39,.7);
+      border:1px solid var(--card-brd);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:.5rem;
+      font-weight:800;
+      color:var(--accent);
+      box-shadow:0 8px 24px rgba(0,0,0,.35);
     }
 
     .card{
-      background:var(--card); border:1px solid var(--card-brd);
-      backdrop-filter: blur(8px);
-      border-radius:.9rem; padding:1rem; margin:.95rem 0;
+      background:var(--card);
+      border:1px solid var(--card-brd);
+      border-radius:.9rem;
+      padding:1rem;
+      margin:.95rem 0;
       box-shadow:0 10px 26px rgba(0,0,0,.35);
       cursor:pointer;
     }
 
+    .card h2{
+      font-size:1rem;
+      color:#f3f6fb;
+      display:flex;
+      align-items:center;
+      gap:.4rem;
+      margin-bottom:.85rem;
+    }
+
     .check{
-      display:flex; gap:.75rem; align-items:center; background:rgba(18,22,28,.9);
-      border:1px solid var(--card-brd); padding:.8rem; border-radius:.7rem; margin:.6rem 0;
+      display:flex;
+      gap:.75rem;
+      align-items:center;
+      background:rgba(18,22,28,.9);
+      border:1px solid var(--card-brd);
+      padding:.8rem;
+      border-radius:.7rem;
+      margin:.6rem 0;
     }
 
     .tick{
-      width:1.55rem; height:1.55rem; border-radius:50%; background:var(--accent);
-      display:grid; place-items:center; font-weight:900; font-size:.8rem;
+      width:1.55rem;
+      height:1.55rem;
+      border-radius:50%;
+      background:var(--accent);
+      color:white;
+      display:grid;
+      place-items:center;
+      font-weight:900;
+      font-size:.8rem;
     }
 
     .cta{
-      position:fixed; bottom:1rem; left:50%; transform:translateX(-50%);
-      background:var(--accent); color:#fff;
-      border-radius:999px; padding:1rem 1.4rem; font-weight:900; font-size:1rem;
-      width:calc(100% - 2rem); max-width:24rem;
+      position:fixed;
+      bottom:1rem;
+      left:50%;
+      transform:translateX(-50%);
+      background:var(--accent);
+      color:white;
+      border:none;
+      border-radius:999px;
+      padding:1rem 1.4rem;
+      font-weight:900;
+      font-size:1rem;
+      width:calc(100% - 2rem);
+      max-width:24rem;
       cursor:pointer;
+      z-index:999;
     }
   </style>
 </head>
 
 <body>
+
 <div class="cash-swirl"></div>
 
 <div id="nameAlert" class="alert">
-  <div class="alert-icon">🎯</div>
-  <div><span class="name"></span> just received a $350 Target Gift Card!</div>
+  🎯 <span class="name"></span> just received a $350 Target Gift Card!
 </div>
 
 <main class="main">
 
   <section class="hero">
     <div class="hero-logo">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/9/9a/Target_logo.svg" alt="Target logo">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/9/9a/Target_logo.svg">
     </div>
     <h1>Target Rewards Hub</h1>
-    <p>Complete a few simple tasks, then redeem straight to a Target Gift Card.</p>
+    <p>Complete a few quick tasks and redeem your Target Gift Card.</p>
     <div class="hero-badge">Fast verification • Email delivery • Mobile-first</div>
   </section>
 
   <div class="timer">⏰ <span id="timer">29:59</span></div>
 
   <article class="card" id="quickStart">
-    <h2>Quick Start Guide <span class="arrow">→</span></h2>
+    <h2>Quick Start Guide →</h2>
 
     <div class="check">
       <div class="tick">✓</div>
       <div>
-        <div><strong>Complete 2–3 tasks</strong></div>
-        <div>Unlock up to $750 in rewards</div>
+        <strong>Complete 2–3 tasks</strong><br>
+        Unlock up to $750 in rewards
       </div>
     </div>
 
     <div class="check">
       <div class="tick">✓</div>
       <div>
-        <div><strong>Use a valid email</strong></div>
-        <div>We’ll send your Target gift claim instructions</div>
+        <strong>Use a valid email</strong><br>
+        We’ll send your Target gift claim instructions
       </div>
     </div>
 
     <div class="check">
       <div class="tick">✓</div>
       <div>
-        <div><strong>Earn per task</strong></div>
-        <div>$25–$250 each — stack as you go</div>
+        <strong>Earn per task</strong><br>
+        $25–$250 each — stack as you go
       </div>
     </div>
   </article>
 
 </main>
 
-<button class="cta" id="ctaBtn">
-  <span>Start Earning Now ($750)</span> →
+<button class="cta" id="ctaBtn" type="button">
+  Start Earning Now ($750) →
 </button>
 
 <script>
-const AFF_LINK = "https://trkio.org/aff_c?offer_id=1381&aff_id=16042";
+const AFF_LINK = "https://trkio.org/aff_c?offer_id=2903&aff_id=16042&source=0812";
 
 const NAMES = [
   'Ava R.', 'Ethan T.', 'Luna W.', 'Caleb R.', 'Aria K.',
@@ -172,16 +274,19 @@ function showAlert(){
   document.querySelector('.name').textContent = n;
   const alert = document.getElementById('nameAlert');
   alert.style.display = 'flex';
-  setTimeout(()=> alert.style.display = 'none', 3200);
+  setTimeout(()=> alert.style.display = 'none', 3000);
 }
 
 setInterval(showAlert, 5200);
 
-document.getElementById('ctaBtn').onclick = ()=>{
-  window.open(AFF_LINK, "_blank");
-};
+// ✅ HARD MOBILE-SAFE BUTTON CLICK
+const btn = document.getElementById('ctaBtn');
+function go(){
+  window.location.href = AFF_LINK;
+}
+btn.addEventListener('click', go);
+btn.addEventListener('touchstart', go);
 </script>
 
 </body>
 </html>
-
