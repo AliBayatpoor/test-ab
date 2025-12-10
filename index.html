@@ -269,6 +269,7 @@ const NAMES = [
   'Julian P.', 'Piper S.', 'Gabriel L.', 'Sofia G.', 'Alexander T.'
 ];
 
+// ===== PROOF ALERT =====
 function showAlert(){
   const n = NAMES[Math.floor(Math.random()*NAMES.length)];
   document.querySelector('.name').textContent = n;
@@ -276,8 +277,26 @@ function showAlert(){
   alert.style.display = 'flex';
   setTimeout(()=> alert.style.display = 'none', 3000);
 }
-
 setInterval(showAlert, 5200);
+
+// ===== TIMER FIX (29:59 LOOP) =====
+const timerEl = document.getElementById('timer');
+
+setInterval(() => {
+  let [m, s] = timerEl.textContent.split(':').map(Number);
+  if (s > 0) {
+    s--;
+  } else {
+    if (m > 0) {
+      m--;
+      s = 59;
+    } else {
+      m = 29;
+      s = 59; // auto-reset loop
+    }
+  }
+  timerEl.textContent = `${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+}, 1000);
 
 // ✅ HARD MOBILE-SAFE BUTTON CLICK
 const btn = document.getElementById('ctaBtn');
@@ -288,6 +307,8 @@ btn.addEventListener('click', go);
 btn.addEventListener('touchstart', go);
 </script>
 
+
 </body>
 </html>
+
 
