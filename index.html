@@ -3,312 +3,431 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-  <title>Target Rewards Hub</title>
-  <meta name="description" content="Quick-start rewards hub for Target-style gift card offers." />
+  <title>SHEIN Credits Portal</title>
+  <meta name="description" content="Claim your SHEIN credits in minutes." />
 
   <style>
     :root{
-      --bg-top:#0b0c0f;
-      --bg-bottom:#14161b;
-      --ink:#eaeef5;
-      --muted:#a7b0c0;
-      --accent:#cc0000;
-      --accent-d:#a80000;
-      --card:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.04));
-      --card-brd:rgba(255,255,255,.12);
-      --ring:rgba(204,0,0,.25);
+      --bg0:#07080a;
+      --bg1:#0d0f14;
+      --ink:#f3f6ff;
+      --muted:rgba(243,246,255,.72);
+
+      --accent:#ffffff;
+      --accent2:#ffd37a;
+      --accent3:#ff5a7a;
+
+      --glass: rgba(255,255,255,.08);
+      --stroke: rgba(255,255,255,.16);
+      --shadow: 0 18px 60px rgba(0,0,0,.55);
+      --ring: 0 0 0 6px rgba(255,211,122,.10);
     }
 
     *{margin:0;padding:0;box-sizing:border-box;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial;}
-    html{font-size:14px}
+    html{font-size:14px;}
 
     body{
       min-height:100vh;
-      background:
-        radial-gradient(80rem 80rem at 120% -10%, rgba(204,0,0,.08), transparent 60%),
-        radial-gradient(60rem 60rem at -10% 110%, rgba(204,0,0,.06), transparent 60%),
-        linear-gradient(to bottom, var(--bg-top), var(--bg-bottom));
       color:var(--ink);
+      background:
+        radial-gradient(900px 500px at 80% -10%, rgba(255,211,122,.18), transparent 60%),
+        radial-gradient(700px 450px at -10% 110%, rgba(255,90,122,.12), transparent 60%),
+        linear-gradient(180deg, var(--bg0), var(--bg1));
       overflow-x:hidden;
     }
 
-    .cash-swirl{
+    .liquid{
       position:fixed;
-      inset:-10vmax;
+      inset:-20vmax;
       pointer-events:none;
       z-index:0;
-      opacity:.18;
+      opacity:.55;
+      filter: blur(28px) saturate(1.1);
       background:
-        conic-gradient(from 0deg at 50% 50%,
-          rgba(255,255,255,.03), transparent 10%,
-          rgba(255,255,255,.03) 20%, transparent 30%,
-          rgba(255,255,255,.03) 40%, transparent 50%,
-          rgba(255,255,255,.03) 60%, transparent 70%,
-          rgba(255,255,255,.03) 80%, transparent 90%,
-          rgba(255,255,255,.03));
-      mask-image: radial-gradient(60rem 60rem at 50% 50%, #000 0%, transparent 70%);
-      animation: swirl 28s linear infinite;
-      filter: blur(12px);
+        radial-gradient(closest-side at 30% 30%, rgba(255,211,122,.22), transparent 55%),
+        radial-gradient(closest-side at 70% 40%, rgba(255,255,255,.08), transparent 55%),
+        radial-gradient(closest-side at 50% 80%, rgba(255,90,122,.18), transparent 60%),
+        conic-gradient(from 220deg at 55% 55%,
+          rgba(255,255,255,.06),
+          rgba(255,211,122,.10),
+          rgba(255,90,122,.09),
+          rgba(255,255,255,.05));
+      animation: drift 18s ease-in-out infinite alternate;
+      mask-image: radial-gradient(900px 700px at 50% 45%, #000 0%, transparent 70%);
     }
-    @keyframes swirl{to{transform:rotate(360deg)}}
+    @keyframes drift{
+      0%{transform:translate3d(-2%, -1%, 0) rotate(-2deg) scale(1.02)}
+      100%{transform:translate3d(2%, 1%, 0) rotate(2deg) scale(1.06)}
+    }
 
     .main{
       width:100%;
       max-width:24rem;
       margin:0 auto;
-      padding:1rem 1rem 8rem;
+      padding:1.1rem 1rem 8.2rem;
       position:relative;
       z-index:1;
     }
 
-    .alert{
+    .toast{
       position:fixed;
       top:1rem;
       left:50%;
       transform:translateX(-50%);
-      background:rgba(22,24,29,.9);
-      border:1px solid var(--card-brd);
-      box-shadow:0 8px 30px rgba(0,0,0,.35);
-      border-radius:.75rem;
-      padding:.75rem 1rem;
       z-index:50;
       display:none;
       align-items:center;
-      gap:.65rem;
+      gap:.6rem;
+      padding:.75rem 1rem;
+      border-radius:999px;
+      background:rgba(10,12,16,.55);
+      border:1px solid rgba(255,255,255,.14);
+      box-shadow:0 14px 40px rgba(0,0,0,.5);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
       font-size:.9rem;
-      color:#e9f7ee;
-      backdrop-filter: blur(10px);
+      color:rgba(255,255,255,.92);
     }
+    .dot{
+      width:.55rem;height:.55rem;border-radius:999px;
+      background:linear-gradient(180deg, var(--accent2), rgba(255,255,255,.35));
+      box-shadow:0 0 0 5px rgba(255,211,122,.10);
+    }
+    .toast b{font-weight:900}
 
     .hero{
       position:relative;
       overflow:hidden;
-      border-radius:1rem;
-      padding:1rem;
-      margin-top:1.25rem;
+      border-radius:1.15rem;
+      padding:1rem 1rem 1.05rem;
+      margin-top:1.2rem;
       margin-bottom:.9rem;
-      background:
-        radial-gradient(40rem 40rem at -10% -20%, rgba(255,255,255,.10), transparent 60%),
-        linear-gradient(135deg, #0e1116 0%, #1a1f27 60%, #101317 100%);
-      color:#f5fff8;
+      background: linear-gradient(180deg, rgba(255,255,255,.10), rgba(255,255,255,.06));
+      border:1px solid rgba(255,255,255,.16);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
       text-align:center;
-      box-shadow:0 10px 30px rgba(0,0,0,.45);
-      border:1px solid var(--card-brd);
     }
-
-    .hero-logo{
-      margin:.35rem auto .6rem;
-      display:flex;
-      align-items:center;
-      justify-content:center;
+    .hero:before{
+      content:"";
+      position:absolute; inset:-2px;
+      background:
+        radial-gradient(500px 280px at 50% -20%, rgba(255,211,122,.22), transparent 60%),
+        radial-gradient(520px 300px at 120% 20%, rgba(255,90,122,.14), transparent 65%);
+      opacity:.9;
+      pointer-events:none;
     }
+    .hero > *{position:relative; z-index:1;}
 
-    .hero-logo img{
-      max-width:220px;
+    /* ✅ clickable hero image -> go.php */
+    .hero-media{
+      display:block;
+      border-radius:1rem;
+      overflow:hidden;
+      border:1px solid rgba(255,255,255,.14);
+      background:rgba(255,255,255,.92);
+      box-shadow:0 16px 40px rgba(0,0,0,.45);
+      margin:.25rem auto .85rem;
+      transform: translateZ(0);
+      transition: transform .18s ease, box-shadow .18s ease;
+    }
+    .hero-media:hover{transform: translateY(-2px); box-shadow:0 22px 60px rgba(0,0,0,.58);}
+    .hero-media:focus-visible{outline:none; box-shadow: var(--shadow), var(--ring);}
+    .hero-media img{
       width:100%;
       height:auto;
-      border-radius:.6rem;
-      box-shadow:0 12px 26px rgba(0,0,0,.45);
-      border:1px solid rgba(255,255,255,.15);
-      object-fit:contain;
-      background:#fff;
-      padding:.6rem;
+      display:block;
+      object-fit:cover;
     }
 
-    .hero h1{font-size:1.6rem; line-height:1.15}
-    .hero p{opacity:.95; margin-top:.45rem; font-size:.95rem; color:#d8e6db}
+    .hero h1{
+      font-size:1.55rem;
+      line-height:1.12;
+      letter-spacing:-.02em;
+      font-weight:950;
+      text-transform:uppercase;
+    }
+    .hero p{
+      margin-top:.5rem;
+      font-size:.95rem;
+      color:rgba(255,255,255,.78);
+    }
 
-    .hero-badge{
-      display:inline-block;
-      margin:.6rem auto 0;
+    .badge-row{
+      margin-top:.8rem;
+      display:flex;
+      justify-content:center;
+      gap:.5rem;
+      flex-wrap:wrap;
+    }
+    .badge{
       padding:.35rem .7rem;
-      font-size:.72rem;
       border-radius:999px;
-      background:rgba(204,0,0,.14);
-      border:1px solid rgba(204,0,0,.35);
-      color:#ffd2d2;
+      font-size:.72rem;
+      background:rgba(0,0,0,.18);
+      border:1px solid rgba(255,255,255,.14);
+      color:rgba(255,255,255,.84);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
     }
+    .badge strong{color:#fff}
 
     .timer{
       margin:1rem 0;
-      padding:.6rem 1rem;
-      border-radius:.7rem;
-      background:rgba(26,31,39,.7);
-      border:1px solid var(--card-brd);
+      padding:.65rem 1rem;
+      border-radius:.9rem;
+      background:rgba(255,255,255,.06);
+      border:1px solid rgba(255,255,255,.14);
       display:flex;
       align-items:center;
       justify-content:center;
       gap:.5rem;
-      font-weight:800;
-      color:var(--accent);
-      box-shadow:0 8px 24px rgba(0,0,0,.35);
+      font-weight:950;
+      color:rgba(255,255,255,.92);
+      box-shadow:0 14px 40px rgba(0,0,0,.45);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+    }
+    .timer .count{
+      color:var(--accent2);
+      text-shadow:0 0 18px rgba(255,211,122,.18);
     }
 
     .card{
-      background:var(--card);
-      border:1px solid var(--card-brd);
-      border-radius:.9rem;
+      background:rgba(255,255,255,.07);
+      border:1px solid rgba(255,255,255,.14);
+      border-radius:1rem;
       padding:1rem;
       margin:.95rem 0;
-      box-shadow:0 10px 26px rgba(0,0,0,.35);
+      box-shadow:0 16px 50px rgba(0,0,0,.5);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
       cursor:pointer;
+      position:relative;
+      overflow:hidden;
     }
-
+    .card:before{
+      content:"";
+      position:absolute; inset:-2px;
+      background: radial-gradient(600px 220px at 10% 0%, rgba(255,255,255,.10), transparent 55%);
+      opacity:.9;
+      pointer-events:none;
+    }
+    .card > *{position:relative; z-index:1;}
     .card h2{
-      font-size:1rem;
-      color:#f3f6fb;
+      font-size:1.02rem;
+      color:rgba(255,255,255,.94);
       display:flex;
       align-items:center;
-      gap:.4rem;
+      justify-content:space-between;
       margin-bottom:.85rem;
+      font-weight:900;
+      letter-spacing:-.01em;
+    }
+    .pill{
+      font-size:.72rem;
+      padding:.26rem .55rem;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.14);
+      background:rgba(0,0,0,.14);
+      color:rgba(255,255,255,.82);
     }
 
-    .check{
+    .step{
       display:flex;
       gap:.75rem;
-      align-items:center;
-      background:rgba(18,22,28,.9);
-      border:1px solid var(--card-brd);
-      padding:.8rem;
-      border-radius:.7rem;
-      margin:.6rem 0;
+      align-items:flex-start;
+      background:rgba(0,0,0,.16);
+      border:1px solid rgba(255,255,255,.12);
+      padding:.85rem;
+      border-radius:.85rem;
+      margin:.65rem 0;
     }
 
     .tick{
-      width:1.55rem;
-      height:1.55rem;
-      border-radius:50%;
-      background:var(--accent);
-      color:white;
+      width:1.65rem;
+      height:1.65rem;
+      border-radius:999px;
       display:grid;
       place-items:center;
-      font-weight:900;
-      font-size:.8rem;
+      font-weight:1000;
+      font-size:.85rem;
+      color:#0b0c0f;
+      background:linear-gradient(180deg, var(--accent2), rgba(255,255,255,.65));
+      box-shadow:0 10px 26px rgba(0,0,0,.45), 0 0 0 6px rgba(255,211,122,.10);
+      flex:0 0 auto;
+      margin-top:.05rem;
     }
+
+    .step strong{color:#fff; font-weight:950}
+    .step div{color:rgba(255,255,255,.78); line-height:1.35}
+
+    a{color:inherit; text-decoration:none;}
 
     .cta{
       position:fixed;
       bottom:1rem;
       left:50%;
       transform:translateX(-50%);
-      background:var(--accent);
-      color:white;
-      border:none;
-      border-radius:999px;
-      padding:1rem 1.4rem;
-      font-weight:900;
-      font-size:1rem;
       width:calc(100% - 2rem);
       max-width:24rem;
+      border:none;
+      border-radius:999px;
+      padding:1rem 1.2rem;
+      font-weight:1000;
+      font-size:1rem;
       cursor:pointer;
       z-index:999;
+      color:#0b0c0f;
+      background: linear-gradient(180deg, rgba(255,255,255,.95), rgba(255,255,255,.80));
+      box-shadow:0 18px 60px rgba(0,0,0,.6), 0 0 0 1px rgba(255,255,255,.14) inset;
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      transition: transform .15s ease, box-shadow .15s ease;
+    }
+    .cta:hover{transform:translateX(-50%) translateY(-2px); box-shadow:0 22px 70px rgba(0,0,0,.7), 0 0 0 1px rgba(255,255,255,.16) inset;}
+    .cta:active{transform:translateX(-50%) translateY(0px) scale(.99);}
+    .cta small{
+      display:block;
+      font-size:.75rem;
+      opacity:.65;
+      font-weight:800;
+      margin-top:.12rem;
     }
   </style>
 </head>
 
 <body>
+  <div class="liquid"></div>
 
-<div class="cash-swirl"></div>
+  <div id="toast" class="toast" aria-live="polite">
+    <span class="dot"></span>
+    <span><b class="name"></b> just claimed SHEIN credits</span>
+  </div>
 
-<div id="nameAlert" class="alert">
-  🎯 <span class="name"></span> just received a $350 Target Gift Card!
-</div>
+  <main class="main">
+    <section class="hero">
+      <!-- ✅ Use your provided image file name/path -->
+      <!-- Put Shn-3.png next to this HTML, or update to your hosted URL -->
+      <a class="hero-media" href="go.php" aria-label="Start claim">
+        <img src="Shn-3.png" alt="SHEIN - Claim Your Credits" />
+      </a>
 
-<main class="main">
+      <h1>Claim Your Credits</h1>
+      <p>Tap in, complete a few quick steps, and unlock your credits.</p>
 
-  <section class="hero">
-    <div class="hero-logo">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/9/9a/Target_logo.svg">
-    </div>
-    <h1>Target Rewards Hub</h1>
-    <p>Complete a few quick tasks and redeem your Target Gift Card.</p>
-    <div class="hero-badge">Fast verification • Email delivery • Mobile-first</div>
-  </section>
-
-  <div class="timer">⏰ <span id="timer">29:59</span></div>
-
-  <article class="card" id="quickStart">
-    <h2>Quick Start Guide →</h2>
-
-    <div class="check">
-      <div class="tick">✓</div>
-      <div>
-        <strong>Complete 2–3 tasks</strong><br>
-        Unlock up to $750 in rewards
+      <div class="badge-row">
+        <div class="badge"><strong>Liquid Glass</strong> • Mobile-first</div>
+        <div class="badge">Fast flow • Clean UI</div>
       </div>
-    </div>
+    </section>
 
-    <div class="check">
-      <div class="tick">✓</div>
-      <div>
-        <strong>Use a valid email</strong><br>
-        We’ll send your Target gift claim instructions
+    <div class="timer">⏳ <span class="count" id="timer">29:59</span></div>
+
+    <article class="card" id="quickStart">
+      <h2>
+        Quick Start
+        <span class="pill">tap to begin →</span>
+      </h2>
+
+      <div class="step">
+        <div class="tick">✓</div>
+        <div>
+          <strong>Complete 2–3 steps</strong><br>
+          Keep it simple, move fast.
+        </div>
       </div>
-    </div>
 
-    <div class="check">
-      <div class="tick">✓</div>
-      <div>
-        <strong>Earn per task</strong><br>
-        $25–$250 each — stack as you go
+      <div class="step">
+        <div class="tick">✓</div>
+        <div>
+          <strong>Use a valid email</strong><br>
+          Your claim details get sent instantly.
+        </div>
       </div>
-    </div>
-  </article>
 
-</main>
+      <div class="step">
+        <div class="tick">✓</div>
+        <div>
+          <strong>Finish & unlock</strong><br>
+          Credits appear after verification.
+        </div>
+      </div>
+    </article>
+  </main>
 
-<button class="cta" id="ctaBtn" type="button">
-  Start Earning Now ($750) →
-</button>
+  <button class="cta" id="ctaBtn" type="button">
+    Start Claim →
+    <small>Continue on the next page</small>
+  </button>
 
-<script>
-const AFF_LINK = "https://trkio.org/aff_c?offer_id=1381&aff_id=16042";
+  <script>
+    const CTA_LINK = "go.php";
 
-const NAMES = [
-  'Ava R.', 'Ethan T.', 'Luna W.', 'Caleb R.', 'Aria K.',
-  'Julian P.', 'Piper S.', 'Gabriel L.', 'Sofia G.', 'Alexander T.'
-];
+    const NAMES = [
+      "Ava R.", "Ethan T.", "Luna W.", "Caleb R.", "Aria K.",
+      "Julian P.", "Piper S.", "Gabriel L.", "Sofia G.", "Alexander T."
+    ];
 
-// ===== PROOF ALERT =====
-function showAlert(){
-  const n = NAMES[Math.floor(Math.random()*NAMES.length)];
-  document.querySelector('.name').textContent = n;
-  const alert = document.getElementById('nameAlert');
-  alert.style.display = 'flex';
-  setTimeout(()=> alert.style.display = 'none', 3000);
-}
-setInterval(showAlert, 5200);
-
-// ===== TIMER FIX (29:59 LOOP) =====
-const timerEl = document.getElementById('timer');
-
-setInterval(() => {
-  let [m, s] = timerEl.textContent.split(':').map(Number);
-  if (s > 0) {
-    s--;
-  } else {
-    if (m > 0) {
-      m--;
-      s = 59;
-    } else {
-      m = 29;
-      s = 59; // auto-reset loop
+    // ===== PROOF TOAST =====
+    const toast = document.getElementById("toast");
+    function showToast(){
+      const n = NAMES[Math.floor(Math.random()*NAMES.length)];
+      toast.querySelector(".name").textContent = n;
+      toast.style.display = "flex";
+      clearTimeout(window.__toastT);
+      window.__toastT = setTimeout(()=> toast.style.display = "none", 2800);
     }
-  }
-  timerEl.textContent = `${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
-}, 1000);
+    setInterval(showToast, 5200);
 
-// ✅ HARD MOBILE-SAFE BUTTON CLICK
-const btn = document.getElementById('ctaBtn');
-function go(){
-  window.location.href = AFF_LINK;
-}
-btn.addEventListener('click', go);
-btn.addEventListener('touchstart', go);
-</script>
+    // ===== TIMER (29:59 LOOP) =====
+    const timerEl = document.getElementById("timer");
+    setInterval(() => {
+      let [m, s] = timerEl.textContent.split(":").map(Number);
+      if (s > 0) s--;
+      else {
+        if (m > 0) { m--; s = 59; }
+        else { m = 29; s = 59; }
+      }
+      timerEl.textContent = `${String(m).padStart(2,"0")}:${String(s).padStart(2,"0")}`;
+    }, 1000);
 
+    function go(){ window.location.href = CTA_LINK; }
 
+    // ✅ SAFE TAP so scrolling doesn't trigger redirect
+    function bindSafeTap(el){
+      if (!el) return;
+
+      let startX = 0, startY = 0, moved = false;
+
+      el.addEventListener("pointerdown", (e) => {
+        startX = e.clientX;
+        startY = e.clientY;
+        moved = false;
+      }, { passive: true });
+
+      el.addEventListener("pointermove", (e) => {
+        const dx = Math.abs(e.clientX - startX);
+        const dy = Math.abs(e.clientY - startY);
+        if (dx > 10 || dy > 10) moved = true;
+      }, { passive: true });
+
+      el.addEventListener("pointerup", () => {
+        if (!moved) go();
+      }, { passive: true });
+
+      // Desktop click (prevents double fire)
+      el.addEventListener("click", (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        go();
+      });
+    }
+
+    // ✅ Only these are “tap to continue”
+    bindSafeTap(document.getElementById("ctaBtn"));
+    bindSafeTap(document.getElementById("quickStart"));
+  </script>
 </body>
 </html>
-
-
